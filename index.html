@@ -69,6 +69,7 @@
         .cursor-dot.magnetic { width:14px; height:14px; background:#fff; }
         @media (max-width:768px) { .cursor-dot,.cursor-ring { display:none; } body { cursor:auto; } }
 
+        /* ---- LOADING SCREEN – CLEAN + GEEKY ACCENT ---- */
         .loading-screen {
             position: fixed; top:0; left:0; width:100%; height:100%;
             background: #06060e;
@@ -142,7 +143,7 @@
 
         .hero { position:relative; width:100%; height:100vh; min-height:700px; display:flex; align-items:center; justify-content:center; overflow:hidden; isolation:isolate; }
         .hero-canvas { position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
-        .hero-overlay { position:absolute; inset:0; background:radial-gradient(ellipse at center, transparent 30%, rgba(6,6,14,0.5) 65%, rgba(6,6,14,0.85) 100%); z-index:1; pointer-events:none; }
+        .hero-overlay { position:absolute; inset:0; background:radial-gradient(ellipse at center, transparent 20%, rgba(6,6,14,0.7) 70%, rgba(6,6,14,0.95) 100%); z-index:1; pointer-events:none; }
         .hero-content { position:relative; z-index:2; text-align:center; max-width:900px; padding:0 24px; }
         .hero-badge { display:inline-flex; align-items:center; gap:8px; padding:8px 20px; border:1px solid var(--glass-border); border-radius:50px; font-size:0.85rem; font-weight:500; letter-spacing:0.06em; color:var(--accent-cyan); background:var(--glass-bg); backdrop-filter:blur(16px); margin-bottom:28px; }
         .hero-badge svg { width:16px; height:16px; fill:var(--accent-cyan); }
@@ -273,10 +274,13 @@
     <a href="#main-content" class="skip-nav">Skip to main content</a>
     <div class="progress-bar" id="progressBar"></div>
 
+    <!-- LOADING SCREEN – AMIT MISHRA + GEEKY TOUCH -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-logo">AMIT MISHRA</div>
         <div class="loading-tagline">&lt; systems initializing /&gt;</div>
-        <div class="loading-bar-track"><div class="loading-bar-fill" id="loadingFill"></div></div>
+        <div class="loading-bar-track">
+            <div class="loading-bar-fill" id="loadingFill"></div>
+        </div>
         <div class="loading-digits" id="loadingPercent">00%</div>
     </div>
 
@@ -321,9 +325,6 @@
         </div>
     </section>
 
-    <!-- Rest of sections exactly as before (about, services, skills, portfolio, why, contact, footer) -->
-    <!-- For brevity they are identical to the previous full code. The complete file includes them all. -->
-
     <section id="about">
         <div class="section-container">
             <div class="about-grid">
@@ -352,7 +353,97 @@
         </div>
     </section>
 
-    <!-- Services, Skills, Portfolio, Why, Contact, Footer sections identical to previous code... -->
+    <section id="services" style="background: var(--bg-secondary);">
+        <div class="section-container">
+            <span class="section-label">02 / Services</span>
+            <h2 class="section-title">What I <span class="gradient-text">Offer</span></h2>
+            <p class="section-desc">Comprehensive technology solutions tailored to your business needs — from web development to cybersecurity and AI automation.</p>
+            <div class="services-grid">
+                <div class="service-card glass-card"><div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="1"/><path d="M8 21h8"/></svg></div><h3>Website Development</h3><ul><li>Premium business websites</li><li>Portfolio & landing pages</li><li>E-commerce platforms</li><li>Custom web applications</li><li>Responsive modern designs</li></ul></div>
+                <div class="service-card glass-card"><div class="service-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="12" y1="2" x2="12" y2="22"/></svg></div><h3>Full Stack Development</h3><ul><li>Frontend development</li><li>Backend systems</li><li>Database architecture</li><li>API development</li><li>Cloud integration & SaaS</li></ul></div>
+                <div class="service-card glass-card"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Cyber Security Solutions</h3><ul><li>Security audits</li><li>Vulnerability assessment</li><li>Website security improvements</li><li>Data protection solutions</li><li>Secure authentication systems</li></ul></div>
+                <div class="service-card glass-card"><div class="service-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M15 2v2M9 2v2M15 22v-2M9 22v-2M20 15h2M2 15h2M20 9h2M2 9h2"/></svg></div><h3>AI & Automation Solutions</h3><ul><li>AI-powered applications</li><li>Business automation</li><li>AI integrations</li><li>Intelligent tools development</li></ul></div>
+                <div class="service-card glass-card"><div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div><h3>Custom Software Solutions</h3><ul><li>Enterprise software</li><li>Business management systems</li><li>Custom dashboards</li><li>Digital transformation solutions</li></ul></div>
+                <div class="service-card glass-card"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div><h3>UI/UX Design</h3><ul><li>Modern interfaces</li><li>User experience optimization</li><li>Interactive prototypes</li><li>Brand-focused designs</li></ul></div>
+                <div class="service-card glass-card"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h3>Cloud & DevOps Solutions</h3><ul><li>Deployment solutions</li><li>Server optimization</li><li>Cloud architecture</li><li>Performance improvement</li></ul></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="section-container">
+            <span class="section-label">03 / Skills</span>
+            <h2 class="section-title">Technologies <span class="gradient-text">I Master</span></h2>
+            <p class="section-desc">A comprehensive toolkit of modern technologies for building secure, scalable, and innovative digital solutions.</p>
+            <div class="skills-grid">
+                <div class="skill-tag">HTML5<span class="skill-level">Expert</span></div><div class="skill-tag">CSS3<span class="skill-level">Expert</span></div><div class="skill-tag">JavaScript<span class="skill-level">Expert</span></div>
+                <div class="skill-tag">React<span class="skill-level">Advanced</span></div><div class="skill-tag">Node.js<span class="skill-level">Advanced</span></div><div class="skill-tag">Python<span class="skill-level">Advanced</span></div>
+                <div class="skill-tag">APIs<span class="skill-level">Advanced</span></div><div class="skill-tag">Database Mgmt<span class="skill-level">Advanced</span></div><div class="skill-tag">Cyber Security<span class="skill-level">Advanced</span></div>
+                <div class="skill-tag">Cloud Technologies<span class="skill-level">Advanced</span></div><div class="skill-tag">AI Tools<span class="skill-level">Intermediate</span></div><div class="skill-tag">Linux<span class="skill-level">Advanced</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" style="background: var(--bg-secondary);">
+        <div class="section-container">
+            <span class="section-label">04 / Portfolio</span>
+            <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+            <p class="section-desc">Explore my latest work showcasing innovative solutions, secure architectures, and modern digital experiences.</p>
+            <div class="portfolio-grid">
+                <div class="portfolio-card"><div class="portfolio-card-image"><div class="cube-container"><div class="cube-face front"></div><div class="cube-face back"></div><div class="cube-face right"></div><div class="cube-face left"></div><div class="cube-face top"></div><div class="cube-face bottom"></div></div></div><div class="portfolio-card-body"><h3>SAM AI v2</h3><p>An advanced AI‑powered assistant platform with natural language processing and intelligent automation capabilities.</p><div class="portfolio-links"><a href="https://sam-ai-v2-psi.vercel.app/" target="_blank" rel="noopener" class="portfolio-link"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a><a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="portfolio-link"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a></div></div></div>
+                <div class="portfolio-card"><div class="portfolio-card-image"><div class="cube-container"><div class="cube-face front"></div><div class="cube-face back"></div><div class="cube-face right"></div><div class="cube-face left"></div><div class="cube-face top"></div><div class="cube-face bottom"></div></div></div><div class="portfolio-card-body"><h3>RailPulse</h3><p>Real‑time railway analytics and monitoring dashboard with predictive insights for operational efficiency.</p><div class="portfolio-links"><a href="https://railpulse-six.vercel.app/" target="_blank" rel="noopener" class="portfolio-link"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a><a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="portfolio-link"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a></div></div></div>
+                <div class="portfolio-card"><div class="portfolio-card-image"><div class="cube-container"><div class="cube-face front"></div><div class="cube-face back"></div><div class="cube-face right"></div><div class="cube-face left"></div><div class="cube-face top"></div><div class="cube-face bottom"></div></div></div><div class="portfolio-card-body"><h3>Leak Hunter Pro</h3><p>Advanced cybersecurity tool for detecting data leaks, vulnerabilities, and exposure across digital assets.</p><div class="portfolio-links"><a href="https://leak-hunter-pro.vercel.app/" target="_blank" rel="noopener" class="portfolio-link"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a><a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="portfolio-link"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a></div></div></div>
+            </div>
+            <div class="text-center mt-48">
+                <a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="btn btn-secondary">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right:8px;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    Explore All Projects on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="why">
+        <div class="section-container">
+            <span class="section-label">05 / Why Choose Me</span>
+            <h2 class="section-title">The <span class="gradient-text">Difference</span></h2>
+            <p class="section-desc">I bring a unique blend of development expertise, security-first thinking, and a relentless focus on quality.</p>
+            <div class="why-grid">
+                <div class="why-card"><div class="why-check">✓</div><div><h4>Innovative Technology Solutions</h4><p>Cutting-edge approaches that leverage the latest advancements for maximum impact.</p></div></div>
+                <div class="why-card"><div class="why-check">✓</div><div><h4>Secure And Scalable Development</h4><p>Security baked into every layer, with architectures designed to scale effortlessly.</p></div></div>
+                <div class="why-card"><div class="why-check">✓</div><div><h4>Modern Premium Designs</h4><p>Visually stunning interfaces that captivate users and elevate your brand identity.</p></div></div>
+                <div class="why-card"><div class="why-check">✓</div><div><h4>Client-Focused Approach</h4><p>Your goals become my mission — transparent communication and dedicated partnership.</p></div></div>
+                <div class="why-card"><div class="why-check">✓</div><div><h4>Continuous Learning & Improvement</h4><p>Always staying ahead of the curve with the latest technologies and best practices.</p></div></div>
+                <div class="why-card"><div class="why-check">✓</div><div><h4>Future Ready Digital Solutions</h4><p>Building with tomorrow in mind — adaptable, resilient, and forward-compatible systems.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background: var(--bg-secondary);">
+        <div class="section-container">
+            <span class="section-label">06 / Contact</span>
+            <h2 class="section-title">Let's <span class="gradient-text">Work Together</span></h2>
+            <p class="section-desc">Have a project in mind? Let's discuss how I can help bring your vision to life with secure, innovative technology.</p>
+            <div class="contact-grid">
+                <form id="contactForm" class="contact-form" novalidate>
+                    <div class="form-group"><input type="text" name="from_name" placeholder="Your Name" required><div class="error-message" data-error="from_name">Please enter your name</div></div>
+                    <div class="form-group"><input type="email" name="reply_to" placeholder="Your Email" required><div class="error-message" data-error="reply_to">Please enter a valid email</div></div>
+                    <div class="form-group"><select name="project_type"><option value="">Project Type</option><option>Website Development</option><option>Full Stack Development</option><option>Cyber Security</option><option>AI & Automation</option><option>Custom Software</option><option>UI/UX Design</option><option>Cloud & DevOps</option><option>Other</option></select></div>
+                    <div class="form-group"><textarea name="message" placeholder="Tell me about your project..." required></textarea><div class="error-message" data-error="message">Please describe your project</div></div>
+                    <button type="submit" class="btn btn-primary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;"><line x1="22" y1="2" x2="11" y2="13"/><polyline points="22 2 15 22 11 13 2 9 22 2"/></svg>Send Inquiry</button>
+                </form>
+                <div class="contact-info-card glass-card">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-info-item"><div class="contact-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><span id="contactEmail">Sam.redefine@gmail.com</span><button class="copy-email-btn" id="copyEmailBtn" title="Copy email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg></button><span class="copied-tooltip" id="copiedTooltip">Copied!</span></div>
+                    <div class="contact-info-item"><div class="contact-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 6.9 8 11.7z"/></svg></div><span>Available for remote & worldwide projects</span></div>
+                    <div class="contact-social-links">
+                        <a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="contact-social-btn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a>
+                        <a href="https://www.instagram.com/entouraged.sam" target="_blank" rel="noopener" class="contact-social-btn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="footer-inner">
@@ -366,130 +457,115 @@
 
     <script>
         (function() {
-            // Loading
+            // ===== FAST GEEKY LOADING =====
             const loadingScreen = document.getElementById('loadingScreen');
             const loadingFill = document.getElementById('loadingFill');
             const loadingPercent = document.getElementById('loadingPercent');
+            
             let progress = 0;
             const interval = setInterval(() => {
                 progress += Math.random() * 30;
-                if (progress >= 100) { progress = 100; clearInterval(interval); loadingFill.style.width = '100%'; loadingPercent.textContent = 'OK'; setTimeout(() => loadingScreen.classList.add('hidden'), 350); }
-                else { loadingFill.style.width = progress + '%'; loadingPercent.textContent = Math.floor(progress) + '%'; }
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    loadingFill.style.width = '100%';
+                    loadingPercent.textContent = 'OK';
+                    setTimeout(() => {
+                        loadingScreen.classList.add('hidden');
+                    }, 350);
+                } else {
+                    loadingFill.style.width = progress + '%';
+                    loadingPercent.textContent = Math.floor(progress) + '%';
+                }
             }, 200);
-            window.addEventListener('load', () => { progress = 100; clearInterval(interval); loadingFill.style.width = '100%'; loadingPercent.textContent = 'OK'; setTimeout(() => loadingScreen.classList.add('hidden'), 350); });
 
+            window.addEventListener('load', () => {
+                progress = 100;
+                clearInterval(interval);
+                loadingFill.style.width = '100%';
+                loadingPercent.textContent = 'OK';
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                }, 350);
+            });
+
+            // ===== REST UNCHANGED =====
             document.getElementById('currentYear').textContent = new Date().getFullYear();
+
             const progressBar = document.getElementById('progressBar');
-            window.addEventListener('scroll', () => { const st = window.scrollY, dh = document.documentElement.scrollHeight - window.innerHeight; progressBar.style.width = (st / dh) * 100 + '%'; });
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                progressBar.style.width = scrollPercent + '%';
+            });
 
-            const cursorDot = document.getElementById('cursorDot'), cursorRing = document.getElementById('cursorRing');
-            let mx = 0, my = 0, rx = 0, ry = 0;
-            document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursorDot.style.transform = `translate(${mx-5}px, ${my-5}px)`; });
-            (function animateRing() { rx += (mx - rx) * 0.2; ry += (my - ry) * 0.2; cursorRing.style.transform = `translate(${rx-22}px, ${ry-22}px)`; requestAnimationFrame(animateRing); })();
-            document.querySelectorAll('a,button,.btn,.service-card,.portfolio-card,.skill-tag,.why-card,input,textarea,select,.hamburger').forEach(el => { el.addEventListener('mouseenter', () => { cursorRing.classList.add('hover'); cursorDot.classList.add('magnetic'); }); el.addEventListener('mouseleave', () => { cursorRing.classList.remove('hover'); cursorDot.classList.remove('magnetic'); }); });
+            const cursorDot = document.getElementById('cursorDot');
+            const cursorRing = document.getElementById('cursorRing');
+            let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursorDot.style.transform = `translate(${mouseX - 5}px, ${mouseY - 5}px)`;
+            });
+            function animateRing() { ringX += (mouseX - ringX) * 0.2; ringY += (mouseY - ringY) * 0.2; cursorRing.style.transform = `translate(${ringX - 22}px, ${ringY - 22}px)`; requestAnimationFrame(animateRing); }
+            animateRing();
+            document.querySelectorAll('a, button, .btn, .service-card, .portfolio-card, .skill-tag, .why-card, input, textarea, select, .hamburger').forEach(el => {
+                el.addEventListener('mouseenter', () => { cursorRing.classList.add('hover'); cursorDot.classList.add('magnetic'); });
+                el.addEventListener('mouseleave', () => { cursorRing.classList.remove('hover'); cursorDot.classList.remove('magnetic'); });
+            });
 
-            const copyBtn = document.getElementById('copyEmailBtn'), tooltip = document.getElementById('copiedTooltip');
-            if (copyBtn) copyBtn.addEventListener('click', () => { navigator.clipboard.writeText('Sam.redefine@gmail.com').then(() => { tooltip.classList.add('show'); setTimeout(() => tooltip.classList.remove('show'), 2000); }); });
+            const copyBtn = document.getElementById('copyEmailBtn');
+            const tooltip = document.getElementById('copiedTooltip');
+            if(copyBtn) copyBtn.addEventListener('click', () => { navigator.clipboard.writeText('Sam.redefine@gmail.com').then(() => { tooltip.classList.add('show'); setTimeout(() => tooltip.classList.remove('show'), 2000); }); });
 
-            const form = document.getElementById('contactForm'), fields = form ? form.querySelectorAll('input,textarea') : [], toast = document.getElementById('toast'), toastMsg = document.getElementById('toastMsg');
-            fields.forEach(f => f.addEventListener('input', () => { f.classList.remove('error'); const e = f.parentElement.querySelector('.error-message'); if(e) e.classList.remove('visible'); }));
-            if (form) form.addEventListener('submit', function(e) { e.preventDefault(); let v = true; fields.forEach(f => { const el = f.parentElement.querySelector('.error-message'); if (!f.validity.valid) { f.classList.add('error'); if(el) el.classList.add('visible'); v = false; } }); if (!v) return; const btn = form.querySelector('button'), orig = btn.innerHTML; btn.innerHTML = 'Sending...'; btn.disabled = true; emailjs.sendForm('service_s2wag8q','template_8h1rv5o',form).then(()=>{btn.innerHTML=orig;btn.disabled=false;form.reset();toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),3000)}).catch(err=>{btn.innerHTML=orig;btn.disabled=false;console.error(err);toastMsg.textContent='✗ Failed to send.';toast.classList.add('error','show');setTimeout(()=>toast.classList.remove('error','show'),3000)}); });
+            const form = document.getElementById('contactForm');
+            const fields = form ? form.querySelectorAll('input, textarea') : [];
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            fields.forEach(field => { field.addEventListener('input', () => { field.classList.remove('error'); const el = field.parentElement.querySelector('.error-message'); if(el) el.classList.remove('visible'); }); });
+            if(form) form.addEventListener('submit', function(e) {
+                e.preventDefault(); let valid = true;
+                fields.forEach(field => { const el = field.parentElement.querySelector('.error-message'); if(!field.validity.valid) { field.classList.add('error'); if(el) el.classList.add('visible'); valid = false; } });
+                if(!valid) return;
+                const btn = form.querySelector('button'); const orig = btn.innerHTML; btn.innerHTML = 'Sending...'; btn.disabled = true;
+                emailjs.sendForm('service_s2wag8q', 'template_8h1rv5o', form)
+                    .then(() => { btn.innerHTML = orig; btn.disabled = false; form.reset(); toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3000); })
+                    .catch(err => { btn.innerHTML = orig; btn.disabled = false; console.error(err); toastMsg.textContent = '✗ Failed to send.'; toast.classList.add('error','show'); setTimeout(() => toast.classList.remove('error','show'), 3000); });
+            });
 
-            // ===== DRAGONFLY-STYLE 3D SCENE WITH ORBITING RING =====
             const heroCanvas = document.getElementById('heroCanvas');
             let threeScene, threeCamera, threeRenderer, threeParticles, threeShapes = [], animationId, mTx=0,mTy=0,cMx=0,cMy=0;
-
             function initThreeJS() {
                 try {
                     const h = document.getElementById('hero'), r = h.getBoundingClientRect();
-                    threeScene = new THREE.Scene();
-                    threeCamera = new THREE.PerspectiveCamera(55, r.width / Math.max(r.height,1), 0.1, 50);
-                    threeCamera.position.set(0, 0.8, 8);
-                    threeCamera.lookAt(0, 0, 0);
-                    threeRenderer = new THREE.WebGLRenderer({ canvas: heroCanvas, alpha: true, antialias: true });
-                    threeRenderer.setSize(r.width, r.height);
-                    threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-                    threeRenderer.setClearColor(0, 0);
-
-                    const ambient = new THREE.AmbientLight(0x1a1a3a, 0.8);
-                    threeScene.add(ambient);
-                    const light1 = new THREE.PointLight(0x00d4ff, 2.5, 20); light1.position.set(4, 3, 5); threeScene.add(light1);
-                    const light2 = new THREE.PointLight(0x8b5cf6, 2.0, 18); light2.position.set(-4, -1, 3); threeScene.add(light2);
-                    const light3 = new THREE.PointLight(0x3b82f6, 1.5, 22); light3.position.set(0, 2, -4); threeScene.add(light3);
-
-                    // Central orb
-                    const orbGeo = new THREE.SphereGeometry(0.6, 64, 64);
-                    const orbMat = new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x004466, roughness: 0.2, metalness: 0.1, transparent: true, opacity: 0.25, depthWrite: false });
-                    const orb = new THREE.Mesh(orbGeo, orbMat); orb.position.set(0, 0.3, -2.2); orb.userData = { pulse: true, baseScale: 1 };
-                    threeScene.add(orb); threeShapes.push(orb);
-
-                    // Inner bright core
-                    const coreGeo = new THREE.SphereGeometry(0.25, 32, 32);
-                    const coreMat = new THREE.MeshBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.5, depthWrite: false });
-                    const core = new THREE.Mesh(coreGeo, coreMat); core.position.copy(orb.position);
-                    threeScene.add(core); threeShapes.push(core);
-
-                    // Glowing ring (torus) around orb
-                    const ringGeo = new THREE.TorusGeometry(0.9, 0.03, 32, 128);
-                    const ringMat = new THREE.MeshBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.6, depthWrite: false, blending: THREE.AdditiveBlending });
-                    const ring = new THREE.Mesh(ringGeo, ringMat); ring.position.copy(orb.position); ring.rotation.x = Math.PI / 2;
-                    threeScene.add(ring); threeShapes.push(ring);
-                    ring.userData = { rotSpeed: [0.002, 0.008, 0.001] };
-
-                    // Particles
-                    const pc = window.innerWidth < 768 ? 2000 : 4000;
-                    const geom = new THREE.BufferGeometry(), pos = new Float32Array(pc * 3), col = new Float32Array(pc * 3);
-                    for (let i = 0; i < pc; i++) { const rad = 4 + Math.random() * 6, theta = Math.random() * Math.PI * 2, phi = Math.asin((Math.random() * 2) - 1); pos[i*3] = Math.cos(theta) * Math.cos(phi) * rad; pos[i*3+1] = Math.sin(phi) * rad * 0.6; pos[i*3+2] = Math.sin(theta) * Math.cos(phi) * rad - 2; const c = Math.random(); col[i*3] = c < 0.5 ? 0 : 0.55; col[i*3+1] = c < 0.5 ? 0.83 : 0.36; col[i*3+2] = 1; }
-                    geom.setAttribute('position', new THREE.BufferAttribute(pos, 3)); geom.setAttribute('color', new THREE.BufferAttribute(col, 3));
-                    threeParticles = new THREE.Points(geom, new THREE.PointsMaterial({ size: 0.03, vertexColors: true, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: 0.7 }));
-                    threeScene.add(threeParticles);
-
-                    const geom2 = new THREE.BufferGeometry(), pos2 = new Float32Array(1000 * 3), col2 = new Float32Array(1000 * 3);
-                    for (let i = 0; i < 1000; i++) { const rad = 2.5 + Math.random() * 3, theta = Math.random() * Math.PI * 2, phi = Math.asin((Math.random() * 2) - 1); pos2[i*3] = Math.cos(theta) * Math.cos(phi) * rad; pos2[i*3+1] = Math.sin(phi) * rad * 0.5; pos2[i*3+2] = Math.sin(theta) * Math.cos(phi) * rad - 1.5; col2[i*3] = 0.9; col2[i*3+1] = 0.9; col2[i*3+2] = 1; }
-                    geom2.setAttribute('position', new THREE.BufferAttribute(pos2, 3)); geom2.setAttribute('color', new THREE.BufferAttribute(col2, 3));
-                    const particles2 = new THREE.Points(geom2, new THREE.PointsMaterial({ size: 0.02, vertexColors: true, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: 0.5 }));
-                    threeScene.add(particles2); threeShapes.push(particles2);
-
-                    const shapesData = [
-                        { geo: new THREE.IcosahedronGeometry(1.0, 1), pos: [2.5, 0.5, -3.5], col: 0x00d4ff, rot: [0.002, 0.005, 0.001] },
-                        { geo: new THREE.TorusKnotGeometry(0.5, 0.15, 100, 16), pos: [-2.8, -0.3, -4.2], col: 0x8b5cf6, rot: [0.003, 0.004, 0.002] },
-                        { geo: new THREE.DodecahedronGeometry(0.55, 0), pos: [0.2, 1.8, -5.5], col: 0x3b82f6, rot: [0.004, 0.002, 0.003] },
-                        { geo: new THREE.TorusGeometry(0.85, 0.05, 20, 64), pos: [-1.8, -1.2, -4.0], col: 0x00d4ff, rot: [0.005, 0.001, 0.004] },
-                        { geo: new THREE.OctahedronGeometry(0.7, 0), pos: [1.5, -1.0, -3.8], col: 0xc9a96e, rot: [0.003, 0.006, 0.002] },
-                        { geo: new THREE.TorusGeometry(1.2, 0.04, 16, 80), pos: [0, -0.5, -3.2], col: 0x00d4ff, rot: [0.001, 0.007, 0.001] },
-                    ];
-                    shapesData.forEach(s => { const mat = new THREE.MeshBasicMaterial({ color: s.col, wireframe: true, transparent: true, opacity: 0.45, depthWrite: false }); const mesh = new THREE.Mesh(s.geo, mat); mesh.position.set(...s.pos); mesh.userData = { rotSpeed: s.rot }; threeScene.add(mesh); threeShapes.push(mesh); });
-                } catch(e) { threeScene = null; }
+                    threeScene = new THREE.Scene(); threeCamera = new THREE.PerspectiveCamera(60, r.width/Math.max(r.height,1), 0.1, 50); threeCamera.position.set(0,0.5,7); threeCamera.lookAt(0,0,0);
+                    threeRenderer = new THREE.WebGLRenderer({canvas:heroCanvas, alpha:true, antialias:true}); threeRenderer.setSize(r.width,r.height); threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio,2)); threeRenderer.setClearColor(0,0);
+                    threeScene.add(new THREE.AmbientLight(0x222244,0.6)); const p1=new THREE.PointLight(0x00d4ff,1.5,20); p1.position.set(3,2,4); threeScene.add(p1); const p2=new THREE.PointLight(0x8b5cf6,1.2,18); p2.position.set(-3,-1,3); threeScene.add(p2);
+                    const sg=new THREE.SphereGeometry(0.4,32,32), sm=new THREE.MeshBasicMaterial({color:0x00d4ff,transparent:true,opacity:0.15,depthWrite:false}), sp=new THREE.Mesh(sg,sm); sp.position.set(0,0.2,-1.5); threeScene.add(sp); threeShapes.push(sp);
+                    const pc=window.innerWidth<768?1200:2500, g=new THREE.BufferGeometry(), pos=new Float32Array(pc*3), col=new Float32Array(pc*3);
+                    for(let i=0;i<pc;i++){pos[i*3]=(Math.random()-0.5)*16;pos[i*3+1]=(Math.random()-0.5)*10;pos[i*3+2]=(Math.random()-0.5)*12-2;const c=Math.random();if(c<0.4){col[i*3]=0;col[i*3+1]=0.83;col[i*3+2]=1}else if(c<0.7){col[i*3]=0.55;col[i*3+1]=0.36;col[i*3+2]=0.96}else{col[i*3]=0.9;col[i*3+1]=0.9;col[i*3+2]=1}}
+                    g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('color',new THREE.BufferAttribute(col,3));threeParticles=new THREE.Points(g,new THREE.PointsMaterial({size:0.025,vertexColors:true,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:0.8}));threeScene.add(threeParticles);
+                    [{geo:new THREE.IcosahedronGeometry(0.9,1),pos:[2.2,0.4,-2.5],col:0x00d4ff,rot:[0.004,0.006,0.002]},{geo:new THREE.TorusKnotGeometry(0.55,0.15,80,16),pos:[-2.4,-0.2,-3.2],col:0x8b5cf6,rot:[0.005,0.003,0.007]},{geo:new THREE.OctahedronGeometry(0.6,0),pos:[0.3,1.6,-4],col:0x3b82f6,rot:[0.003,0.008,0.004]},{geo:new THREE.TorusGeometry(0.7,0.06,16,48),pos:[-1.5,-1.1,-3],col:0x00d4ff,rot:[0.006,0.002,0.005]},{geo:new THREE.SphereGeometry(0.35,16,16),pos:[1.8,-0.9,-2.8],col:0xc9a96e,rot:[0.005,0.005,0.003]}].forEach(s=>{const m=new THREE.Mesh(s.geo,new THREE.MeshBasicMaterial({color:s.col,wireframe:true,transparent:true,opacity:0.55,depthWrite:false}));m.position.set(...s.pos);m.userData={rotSpeed:s.rot};threeScene.add(m);threeShapes.push(m)});
+                    const rg=new THREE.TorusGeometry(1.3,0.015,8,80),rm=new THREE.MeshBasicMaterial({color:0x00d4ff,wireframe:true,transparent:true,opacity:0.3,depthWrite:false}),ri=new THREE.Mesh(rg,rm);ri.position.set(0,-0.3,-2);ri.rotation.x=Math.PI/3;ri.userData={rotSpeed:[0.002,0.009,0.001]};threeScene.add(ri);threeShapes.push(ri);
+                }catch(e){threeScene=null}
             }
-
-            function animateThreeJS() {
-                if (!threeScene) return;
-                animationId = requestAnimationFrame(animateThreeJS);
-                cMx += (mTx - cMx) * 0.05; cMy += (mTy - cMy) * 0.05;
-                threeCamera.position.x += (cMx * 2.2 - threeCamera.position.x) * 0.03;
-                threeCamera.position.y += (-cMy * 1.1 - threeCamera.position.y) * 0.03;
-                threeCamera.lookAt(0, 0, -1.5);
-                threeShapes.forEach(s => { if (s.userData?.rotSpeed) { s.rotation.x += s.userData.rotSpeed[0]; s.rotation.y += s.userData.rotSpeed[1]; s.rotation.z += s.userData.rotSpeed[2]; } if (s.userData?.pulse) { s.scale.setScalar(1 + Math.sin(Date.now() * 0.003) * 0.03); } });
-                if (threeParticles) { threeParticles.rotation.y += 0.0002; threeParticles.rotation.x += 0.0001; }
-                threeRenderer.render(threeScene, threeCamera);
-            }
-
-            function resizeThreeJS() { if (!threeScene) return; const r = document.getElementById('hero').getBoundingClientRect(); threeCamera.aspect = r.width / Math.max(r.height,1); threeCamera.updateProjectionMatrix(); threeRenderer.setSize(r.width, r.height); }
-            document.addEventListener('mousemove', e => { mTx = (e.clientX / window.innerWidth) * 2 - 1; mTy = (e.clientY / window.innerHeight) * 2 - 1; });
-            initThreeJS(); if (threeScene) animateThreeJS(); window.addEventListener('resize', resizeThreeJS);
+            function animateThreeJS(){if(!threeScene)return;animationId=requestAnimationFrame(animateThreeJS);cMx+=(mTx-cMx)*0.05;cMy+=(mTy-cMy)*0.05;threeCamera.position.x+=(cMx*1.5-threeCamera.position.x)*0.03;threeCamera.position.y+=(-cMy*0.9-threeCamera.position.y)*0.03;threeCamera.lookAt(0,0,-1);threeShapes.forEach(s=>{if(s.userData?.rotSpeed){s.rotation.x+=s.userData.rotSpeed[0];s.rotation.y+=s.userData.rotSpeed[1];s.rotation.z+=s.userData.rotSpeed[2]}});if(threeParticles){threeParticles.rotation.y+=0.0003;threeParticles.rotation.x+=0.0002}threeRenderer.render(threeScene,threeCamera)}
+            function resizeThreeJS(){if(!threeScene)return;const r=document.getElementById('hero').getBoundingClientRect();threeCamera.aspect=r.width/Math.max(r.height,1);threeCamera.updateProjectionMatrix();threeRenderer.setSize(r.width,r.height)}
+            document.addEventListener('mousemove',e=>{mTx=(e.clientX/window.innerWidth)*2-1;mTy=(e.clientY/window.innerHeight)*2-1});initThreeJS();if(threeScene)animateThreeJS();window.addEventListener('resize',resizeThreeJS);
 
             gsap.registerPlugin(ScrollTrigger);
-            const ht = document.getElementById('heroTitle'); if(ht) { const t = ht.textContent; ht.innerHTML = t.split('').map(c => `<span class="char">${c}</span>`).join(''); gsap.from('.hero-title .char', { opacity:0, y:40, rotateX:-90, stagger:0.03, duration:0.8, ease:'back.out(1.7)', delay:0.3 }); }
-            ['#about .about-visual','#about .about-text','#services .service-card','#skills .skill-tag','#portfolio .portfolio-card','#why .why-card','#contact .contact-form','#contact .contact-info-card'].forEach(sel => { const els = document.querySelectorAll(sel); if(!els.length) return; gsap.fromTo(els, { opacity:0, y:60, scale:0.95 }, { opacity:1, y:0, scale:1, duration:0.8, ease:'power3.out', stagger:els.length>1?0.08:0, scrollTrigger:{ trigger:els[0], start:'top 85%', toggleActions:'play none none none' } }); });
-            document.querySelectorAll('.why-card, .service-card, .portfolio-card').forEach(card => { card.addEventListener('mousemove', e => { const r = card.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, cx = r.width/2, cy = r.height/2, rx = (y-cy)/8, ry = (cx-x)/8; card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(5px)`; }); card.addEventListener('mouseleave', () => card.style.transform = 'none'); });
+            const ht=document.getElementById('heroTitle');if(ht){const t=ht.textContent;ht.innerHTML=t.split('').map(c=>`<span class="char">${c}</span>`).join('');gsap.from('.hero-title .char',{opacity:0,y:40,rotateX:-90,stagger:0.03,duration:0.8,ease:'back.out(1.7)',delay:0.3})}
+            ['#about .about-visual','#about .about-text','#services .service-card','#skills .skill-tag','#portfolio .portfolio-card','#why .why-card','#contact .contact-form','#contact .contact-info-card'].forEach(sel=>{const els=document.querySelectorAll(sel);if(!els.length)return;gsap.fromTo(els,{opacity:0,y:60,scale:0.95},{opacity:1,y:0,scale:1,duration:0.8,ease:'power3.out',stagger:els.length>1?0.08:0,scrollTrigger:{trigger:els[0],start:'top 85%',toggleActions:'play none none none'}})});
+            document.querySelectorAll('.why-card, .service-card, .portfolio-card').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,cx=r.width/2,cy=r.height/2,rx=(y-cy)/8,ry=(cx-x)/8;card.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(5px)`});card.addEventListener('mouseleave',()=>{card.style.transform='none'})});
 
-            const nav = document.getElementById('nav'), ham = document.getElementById('hamburger'), nl = document.getElementById('navLinks'), al = nl.querySelectorAll('a'), bt = document.getElementById('backToTop');
-            window.addEventListener('scroll', () => { const y = window.scrollY; nav.classList.toggle('scrolled', y>60); bt.classList.toggle('visible', y>600); let cur=''; document.querySelectorAll('section[id]').forEach(s => { if(y >= s.offsetTop-120) cur = s.getAttribute('id'); }); al.forEach(a => { a.classList.remove('active'); if(a.getAttribute('href')==='#'+cur) a.classList.add('active'); }); });
-            ham.addEventListener('click', () => { const ex = ham.getAttribute('aria-expanded')==='true'; ham.setAttribute('aria-expanded', !ex); ham.classList.toggle('active'); nl.classList.toggle('active'); });
-            al.forEach(a => a.addEventListener('click', () => { ham.classList.remove('active'); nl.classList.remove('active'); ham.setAttribute('aria-expanded','false'); }));
-            bt.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+            const nav=document.getElementById('nav'),ham=document.getElementById('hamburger'),nl=document.getElementById('navLinks'),al=nl.querySelectorAll('a'),bt=document.getElementById('backToTop');
+            window.addEventListener('scroll',()=>{const y=window.scrollY;nav.classList.toggle('scrolled',y>60);bt.classList.toggle('visible',y>600);let cur='';document.querySelectorAll('section[id]').forEach(s=>{if(y>=s.offsetTop-120)cur=s.getAttribute('id')});al.forEach(a=>{a.classList.remove('active');if(a.getAttribute('href')==='#'+cur)a.classList.add('active')})});
+            ham.addEventListener('click',()=>{const ex=ham.getAttribute('aria-expanded')==='true';ham.setAttribute('aria-expanded',!ex);ham.classList.toggle('active');nl.classList.toggle('active')});
+            al.forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('active');nl.classList.remove('active');ham.setAttribute('aria-expanded','false')}));
+            bt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-            if (threeScene) { const obs = new IntersectionObserver(e => { e.forEach(en => { if(!en.isIntersecting && animationId) { cancelAnimationFrame(animationId); animationId = null; } else if(en.isIntersecting && !animationId) animateThreeJS(); }); }, { threshold:0.1 }); obs.observe(document.getElementById('hero')); }
+            if(threeScene){const o=new IntersectionObserver(e=>{e.forEach(en=>{if(!en.isIntersecting&&animationId){cancelAnimationFrame(animationId);animationId=null}else if(en.isIntersecting&&!animationId)animateThreeJS()})},{threshold:0.1});o.observe(document.getElementById('hero'))}
         })();
     </script>
 </body>
