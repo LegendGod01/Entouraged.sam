@@ -94,8 +94,30 @@
 
         .nav { position:fixed; top:0; left:0; width:100%; z-index:1000; height:var(--nav-height); transition:all 0.4s; padding:0 40px; display:flex; align-items:center; justify-content:space-between; background:transparent; }
         .nav.scrolled { background:rgba(6,6,14,0.85); backdrop-filter:blur(24px); border-bottom:1px solid var(--glass-border); box-shadow:0 4px 30px rgba(0,0,0,0.4); }
-        .nav-logo img { height:44px; width:auto; filter:drop-shadow(0 0 10px rgba(0,212,255,0.5)); transition:filter 0.3s ease, transform 0.3s ease; }
-        .nav-logo img:hover { filter:drop-shadow(0 0 16px rgba(0,212,255,0.8)); transform:scale(1.05); }
+        /* New 3D Logo */
+        .nav-logo .logo-3d {
+            font-size: 2.2rem;
+            font-weight: 900;
+            font-family: var(--font-mono);
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0,212,255,0.8), 0 0 40px rgba(139,92,246,0.5);
+            animation: logoFloat 3s ease-in-out infinite, logoPulse 2s ease-in-out infinite;
+            display: inline-block;
+            transform-style: preserve-3d;
+            perspective: 500px;
+            letter-spacing: 0.05em;
+        }
+        @keyframes logoFloat {
+            0%,100% { transform: translateY(0) rotateY(0deg); }
+            50% { transform: translateY(-4px) rotateY(10deg); }
+        }
+        @keyframes logoPulse {
+            0%,100% { filter: drop-shadow(0 0 8px rgba(0,212,255,0.6)); }
+            50% { filter: drop-shadow(0 0 20px rgba(139,92,246,0.8)); }
+        }
         .nav-links { display:flex; list-style:none; gap:32px; align-items:center; }
         .nav-links a { color:var(--text-secondary); text-decoration:none; font-size:0.9rem; font-weight:500; letter-spacing:0.02em; position:relative; padding:6px 0; }
         .nav-links a::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--accent-cyan); border-radius:2px; transition:width 0.3s; }
@@ -119,7 +141,28 @@
         .hero-badge svg { width:16px; height:16px; fill:var(--accent-cyan); }
         .hero-title { font-size:clamp(2.8rem, 7vw, 5.2rem); font-weight:900; line-height:1.05; letter-spacing:-0.02em; margin-bottom:20px; background:linear-gradient(180deg, #ffffff 20%, #a0b8d8 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
         .hero-title .char { display:inline-block; }
-        .hero-subtitle { font-size:clamp(1rem, 2vw, 1.25rem); color:var(--text-secondary); max-width:600px; margin:0 auto 36px; }
+        /* Animated Subtitle */
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 36px;
+            font-family: var(--font-mono);
+            border-right: 2px solid var(--accent-cyan);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 4s steps(60, end) forwards, blink-caret 0.75s step-end infinite;
+            letter-spacing: 0.02em;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--accent-cyan); }
+        }
         .hero-buttons { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
         .btn { padding:15px 34px; border-radius:50px; font-weight:600; font-size:0.95rem; letter-spacing:0.02em; text-decoration:none; cursor:pointer; border:none; transition:all 0.35s; font-family:var(--font-primary); }
         .btn-primary { background:linear-gradient(135deg,var(--accent-cyan),var(--accent-blue)); color:#000; box-shadow:0 4px 24px var(--accent-cyan-glow); }
@@ -259,7 +302,10 @@
     </div>
 
     <nav class="nav" id="nav">
-        <a href="#" class="nav-logo"><img src="logo.png" alt="Amit Kumar Mishra Logo" width="44" height="44" loading="lazy"></a>
+        <a href="#" class="nav-logo">
+            <!-- New 3D Animated Logo -->
+            <span class="logo-3d">AM</span>
+        </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#hero" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
