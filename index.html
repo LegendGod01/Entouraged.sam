@@ -31,7 +31,6 @@
 
         * { box-sizing: border-box; }
         
-        /* Hides default cursor on desktop for custom cursor */
         @media (min-width: 769px) { 
             body, a, button, input, textarea { cursor: none !important; } 
         }
@@ -81,7 +80,7 @@
         #webgl-canvas {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100svh;
             z-index: 0; pointer-events: none; 
-            opacity: 0.5; /* Balanced for text readability */
+            opacity: 0.65; /* Balanced for Dragonfly Vibe */
         }
 
         /* --- LAYOUT ARCHITECTURE --- */
@@ -92,7 +91,7 @@
         }
         .min-vh-100 { min-height: 100vh; min-height: 100svh; }
 
-        /* --- TYPOGRAPHY (Added text-shadow for better readability) --- */
+        /* --- TYPOGRAPHY (Text Shadows included for readability) --- */
         .tech-mono { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent-cyan); letter-spacing: 2px; text-transform: uppercase; text-shadow: 0px 2px 8px rgba(0,0,0,0.8); }
         .gradient-text { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         h1 { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 800; line-height: 1.1; margin: 1rem 0; letter-spacing: -1px; text-shadow: 0px 4px 20px rgba(0,0,0,0.8); }
@@ -102,7 +101,7 @@
 
         /* --- UI COMPONENTS --- */
         .glass-card {
-            background: rgba(3, 3, 5, 0.65); /* Darker background for contrast */
+            background: rgba(3, 3, 5, 0.7); 
             backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--surface-border); border-radius: 16px; padding: 2.5rem;
             transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -147,8 +146,6 @@
 
         /* --- GRIDS & LISTS --- */
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
-        
         .skill-list { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
         .skill-tag {
             background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
@@ -156,7 +153,6 @@
             font-size: 0.85rem; color: #EAEAEA; transition: border-color 0.3s, color 0.3s;
         }
         .skill-tag:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
-
         .check-list { list-style: none; padding: 0; margin: 0; }
         .check-list li { position: relative; padding-left: 2rem; margin-bottom: 1rem; color: var(--text-muted); font-size: 1.1rem; }
         .check-list li::before { content: '▹'; position: absolute; left: 0; top: -2px; color: var(--accent-cyan); font-size: 1.2rem; font-family: monospace; }
@@ -268,54 +264,37 @@
             </div>
         </section>
 
-        <!-- 5. PORTFOLIO / FEATURED PROJECTS SECTION -->
+        <!-- 5. PORTFOLIO SECTION -->
         <section class="section-container" id="portfolio">
             <h2 class="gsap-reveal">FEATURED <span class="gradient-text">PROJECTS</span></h2>
             <p class="gsap-reveal" style="max-width: 600px; margin-bottom: 3rem;">Explore a curated selection of recent digital architectures, secure web solutions, and custom applications.</p>
             
             <div class="grid-3">
-                
-                <!-- Project 1: Sam AI v2 -->
                 <div class="glass-card project-card gsap-reveal interactive-hover">
-                    <div class="project-visual">
-                        <i class="ph ph-brain" style="font-size: 4rem; color: var(--accent-cyan);"></i>
-                    </div>
+                    <div class="project-visual"><i class="ph ph-brain" style="font-size: 4rem; color: var(--accent-cyan);"></i></div>
                     <h3>Sam AI v2</h3>
                     <p style="font-size: 0.95rem;">An advanced multi-modal artificial intelligence platform featuring real-time processing and a sleek cybernetic interface.</p>
-                    <div class="project-tags">
-                        <span class="p-tag">AI Integration</span><span class="p-tag">React</span><span class="p-tag">API</span>
-                    </div>
+                    <div class="project-tags"><span class="p-tag">AI Integration</span><span class="p-tag">React</span><span class="p-tag">API</span></div>
                     <a href="https://sam-ai-v2-psi.vercel.app/" target="_blank" class="btn btn-outline interactive-hover" style="width: 100%; padding: 0.8rem;"><i class="ph ph-arrow-square-out"></i> View Live Site</a>
                 </div>
 
-                <!-- Project 2: RailPulse -->
                 <div class="glass-card project-card gsap-reveal interactive-hover">
-                    <div class="project-visual">
-                        <i class="ph ph-train" style="font-size: 4rem; color: var(--accent-cyan);"></i>
-                    </div>
+                    <div class="project-visual"><i class="ph ph-train" style="font-size: 4rem; color: var(--accent-cyan);"></i></div>
                     <h3>RailPulse</h3>
                     <p style="font-size: 0.95rem;">A modern transit and logistics tracking dashboard providing real-time data visualization and operational insights.</p>
-                    <div class="project-tags">
-                        <span class="p-tag">UI/UX</span><span class="p-tag">Dashboard</span><span class="p-tag">Real-time Data</span>
-                    </div>
+                    <div class="project-tags"><span class="p-tag">UI/UX</span><span class="p-tag">Dashboard</span><span class="p-tag">Real-time Data</span></div>
                     <a href="https://railpulse-six.vercel.app/" target="_blank" class="btn btn-outline interactive-hover" style="width: 100%; padding: 0.8rem;"><i class="ph ph-arrow-square-out"></i> View Live Site</a>
                 </div>
 
-                <!-- Project 3: Leak Hunter Pro (Cybersecurity Solution Added) -->
                 <div class="glass-card project-card gsap-reveal interactive-hover">
-                    <div class="project-visual">
-                        <i class="ph ph-shield-check" style="font-size: 4rem; color: var(--accent-cyan);"></i>
-                    </div>
+                    <div class="project-visual"><i class="ph ph-shield-check" style="font-size: 4rem; color: var(--accent-cyan);"></i></div>
                     <h3>Leak Hunter Pro</h3>
                     <p style="font-size: 0.95rem;">Advanced cybersecurity tool designed for vulnerability assessment, threat intelligence, and data leak detection.</p>
-                    <div class="project-tags">
-                        <span class="p-tag">Cyber Security</span><span class="p-tag">Threat Intel</span><span class="p-tag">Auditing</span>
-                    </div>
+                    <div class="project-tags"><span class="p-tag">Cyber Security</span><span class="p-tag">Threat Intel</span><span class="p-tag">Auditing</span></div>
                     <a href="https://leak-hunter-pro.vercel.app/" target="_blank" class="btn btn-outline interactive-hover" style="width: 100%; padding: 0.8rem;"><i class="ph ph-arrow-square-out"></i> View Live Tool</a>
                 </div>
             </div>
 
-            <!-- EXPLICIT DIRECT EMAIL CTA FOR CLIENTS -->
             <div class="gsap-reveal" style="margin-top: 4rem; text-align: center; border-top: 1px solid var(--surface-border); padding-top: 3rem;">
                 <h3 style="font-size: 1.8rem;">Impressed by the architecture?</h3>
                 <p style="margin-bottom: 2rem;">Let's discuss how we can engineer a custom, secure solution for your business.</p>
@@ -378,210 +357,186 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // --- 1. TERMINAL PRELOADER LOGIC ---
+            // --- 1. TERMINAL PRELOADER ---
             const preloader = document.getElementById('preloader');
             const preText = document.getElementById('preloader-text');
-            const terminalMessages = [
-                "SYS.INIT // CONNECTING TO HOST...",
-                "ESTABLISHING SECURE PROTOCOLS...",
-                "RENDERING 3D ENVIRONMENT...",
-                "ACCESS GRANTED // 100%"
-            ];
-            
+            const terminalMessages = ["SYS.INIT // CONNECTING...", "ESTABLISHING PROTOCOLS...", "RENDERING DRAGONFLY TOPOLOGY...", "ACCESS GRANTED"];
             let msgIndex = 0;
             const bootSequence = setInterval(() => {
                 msgIndex++;
-                if(msgIndex < terminalMessages.length) {
-                    preText.innerText = terminalMessages[msgIndex];
-                } else {
-                    clearInterval(bootSequence);
-                    preloader.style.opacity = '0';
-                    setTimeout(() => preloader.remove(), 800);
-                }
+                if(msgIndex < terminalMessages.length) preText.innerText = terminalMessages[msgIndex];
+                else { clearInterval(bootSequence); preloader.style.opacity = '0'; setTimeout(() => preloader.remove(), 800); }
             }, 600);
 
-            // --- 2. LENIS SMOOTH SCROLLING ---
-            const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-                smooth: true
-            });
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
-            }
+            // --- 2. SMOOTH SCROLLING ---
+            const lenis = new Lenis({ duration: 1.2, smooth: true });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
             requestAnimationFrame(raf);
 
-            // --- 3. CUSTOM MAGNETIC CURSOR (Desktop Only) ---
+            // --- 3. CUSTOM CURSOR ---
             if (window.innerWidth > 768) {
                 const cursorDot = document.querySelector('.cursor-dot');
                 const cursorOutline = document.querySelector('.cursor-outline');
-                
                 window.addEventListener('mousemove', (e) => {
-                    const posX = e.clientX;
-                    const posY = e.clientY;
-                    
-                    cursorDot.style.left = `${posX}px`;
-                    cursorDot.style.top = `${posY}px`;
-                    
-                    cursorOutline.animate({
-                        left: `${posX}px`, top: `${posY}px`
-                    }, { duration: 500, fill: "forwards" });
+                    cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+                    cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
                 });
-
-                const interactives = document.querySelectorAll('a, button, .interactive-hover');
-                interactives.forEach(el => {
-                    el.addEventListener('mouseenter', () => {
-                        cursorOutline.style.width = '60px';
-                        cursorOutline.style.height = '60px';
-                        cursorOutline.style.backgroundColor = 'rgba(0, 240, 255, 0.1)';
-                        cursorOutline.style.borderColor = 'rgba(0, 240, 255, 1)';
-                    });
-                    el.addEventListener('mouseleave', () => {
-                        cursorOutline.style.width = '40px';
-                        cursorOutline.style.height = '40px';
-                        cursorOutline.style.backgroundColor = 'transparent';
-                        cursorOutline.style.borderColor = 'rgba(0, 240, 255, 0.5)';
-                    });
+                document.querySelectorAll('a, button, .interactive-hover').forEach(el => {
+                    el.addEventListener('mouseenter', () => { cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px'; cursorOutline.style.backgroundColor = 'rgba(0, 240, 255, 0.1)'; });
+                    el.addEventListener('mouseleave', () => { cursorOutline.style.width = '40px'; cursorOutline.style.height = '40px'; cursorOutline.style.backgroundColor = 'transparent'; });
                 });
             }
 
-            // --- 4. UPGRADED THREE.JS PARTICLE ENGINE ---
+            // --- 4. DRAGONFLY STYLE 3D LIQUID TOPOLOGY ---
             const canvas = document.querySelector('#webgl-canvas');
             const scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x030305);
+            scene.fog = new THREE.FogExp2(0x030305, 0.02);
 
-            const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-            camera.position.z = 18;
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.set(0, 15, 20); // Looking slightly down at the wave
+            camera.lookAt(0, -2, 0);
 
-            // Mouse tracking variables for 3D Parallax
-            let mouseX = 0;
-            let mouseY = 0;
-            let targetX = 0;
-            let targetY = 0;
-            const windowHalfX = window.innerWidth / 2;
-            const windowHalfY = window.innerHeight / 2;
-
-            document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX - windowHalfX);
-                mouseY = (event.clientY - windowHalfY);
-            });
-
-            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            const particleCount = 12000; 
-            const basePositions = new Float32Array(particleCount * 3);
-            const targetPositions = new Float32Array(particleCount * 3);
-            const randoms = new Float32Array(particleCount);
+            // Mouse setup for interactive ripples
+            const raycaster = new THREE.Raycaster();
+            const mouse = new THREE.Vector2();
+            let mouse3D = new THREE.Vector3(0,0,0);
 
-            for (let i = 0; i < particleCount; i++) {
-                const phi = Math.acos(-1 + (2 * i) / particleCount);
-                const theta = Math.sqrt(particleCount * Math.PI) * phi;
-                const rSphere = 4.5;
-                basePositions[i * 3] = rSphere * Math.cos(theta) * Math.sin(phi);
-                basePositions[i * 3 + 1] = rSphere * Math.sin(theta) * Math.sin(phi);
-                basePositions[i * 3 + 2] = rSphere * Math.cos(phi);
+            document.addEventListener('mousemove', (event) => {
+                mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+                
+                raycaster.setFromCamera(mouse, camera);
+                const planeZ = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+                raycaster.ray.intersectPlane(planeZ, mouse3D);
+            });
 
-                const u = Math.random() * Math.PI * 2;
-                const v = Math.random() * Math.PI * 2;
-                const R = 6.5; const r = 1.8; 
-                targetPositions[i * 3] = (R + r * Math.cos(v)) * Math.cos(u);
-                targetPositions[i * 3 + 1] = (R + r * Math.cos(v)) * Math.sin(u);
-                targetPositions[i * 3 + 2] = r * Math.sin(v);
+            // Creates a dense flat plane for the particles (The Sea of Data)
+            const geometry = new THREE.PlaneGeometry(80, 80, 180, 180);
+            geometry.rotateX(-Math.PI * 0.5); // Lay it flat
 
-                randoms[i] = Math.random(); 
-            }
-
-            const geometry = new THREE.BufferGeometry();
-            geometry.setAttribute('position', new THREE.BufferAttribute(basePositions, 3));
-            geometry.setAttribute('aTargetPosition', new THREE.BufferAttribute(targetPositions, 3));
+            const count = geometry.attributes.position.count;
+            const randoms = new Float32Array(count);
+            for(let i = 0; i < count; i++) randoms[i] = Math.random();
             geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
 
-            // UPDATED SHADER: Added uPixelRatio for retina/mobile scale support
+            // Custom WebGL Shader for Liquid Flow & Interactive Ripples
             const vertexShader = `
-                uniform float uProgress;
                 uniform float uTime;
+                uniform vec3 uMousePos;
                 uniform float uPixelRatio;
-                attribute vec3 aTargetPosition;
                 attribute float aRandom;
-                varying vec3 vPosition;
+                varying float vElevation;
                 
+                // Simplex Noise algorithm for organic waves
+                vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+                vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+                vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
+                float snoise(vec2 v) {
+                    const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+                    vec2 i  = floor(v + dot(v, C.yy) );
+                    vec2 x0 = v -   i + dot(i, C.xx);
+                    vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+                    vec4 x12 = x0.xyxy + C.xxzz;
+                    x12.xy -= i1;
+                    i = mod289(i);
+                    vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 )) + i.x + vec3(0.0, i1.x, 1.0 ));
+                    vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+                    m = m*m; m = m*m;
+                    vec3 x = 2.0 * fract(p * C.www) - 1.0;
+                    vec3 h = abs(x) - 0.5;
+                    vec3 ox = floor(x + 0.5);
+                    vec3 a0 = x - ox;
+                    m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+                    vec3 g;
+                    g.x  = a0.x  * x0.x  + h.x  * x0.y;
+                    g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+                    return 130.0 * dot(m, g);
+                }
+
                 void main() {
-                    vec3 currentPos = mix(position, aTargetPosition, uProgress);
-                    currentPos.y += sin(uTime + currentPos.x * 2.0) * 0.15;
-                    vPosition = currentPos; 
+                    vec4 modelPosition = modelMatrix * vec4(position, 1.0);
                     
-                    vec4 modelViewPosition = modelViewMatrix * vec4(currentPos, 1.0);
-                    gl_Position = projectionMatrix * modelViewPosition;
+                    // 1. Core Organic Wave (Dragonfly style)
+                    float elevation = snoise(vec2(modelPosition.x * 0.1, modelPosition.z * 0.1 + uTime * 0.2)) * 3.0;
+                    elevation += snoise(vec2(modelPosition.x * 0.2 - uTime * 0.3, modelPosition.z * 0.2)) * 1.5;
                     
-                    // Twinkle calculation
-                    float pulse = sin(uTime * (2.0 + aRandom * 5.0)) * 0.5 + 0.5;
+                    // 2. Interactive Mouse Ripple
+                    float distanceToMouse = distance(modelPosition.xz, uMousePos.xz);
+                    float rippleEffect = 0.0;
+                    if(distanceToMouse < 12.0) {
+                        rippleEffect = sin((12.0 - distanceToMouse) * 1.5 - uTime * 6.0) * (1.0 - (distanceToMouse / 12.0)) * 2.0;
+                    }
                     
-                    // FIXED: Now accurately scales based on device pixel ratio and distance
-                    gl_PointSize = uPixelRatio * (2.0 + pulse * 2.0) * (30.0 / -modelViewPosition.z);
+                    modelPosition.y += elevation + rippleEffect;
+                    vElevation = elevation + rippleEffect;
+                    
+                    vec4 viewPosition = viewMatrix * modelPosition;
+                    gl_Position = projectionMatrix * viewPosition;
+                    
+                    // Particle size scaling
+                    float pulse = sin(uTime * 2.0 + aRandom * 10.0) * 0.5 + 0.5;
+                    gl_PointSize = uPixelRatio * (2.0 + pulse * 1.5) * (40.0 / -viewPosition.z);
                 }
             `;
 
             const fragmentShader = `
-                varying vec3 vPosition;
-                uniform float uTime;
-                
+                varying float vElevation;
                 void main() {
-                    float distanceToCenter = distance(gl_PointCoord, vec2(0.5));
-                    if(distanceToCenter > 0.5) discard;
+                    // Make particles circular
+                    float dist = distance(gl_PointCoord, vec2(0.5));
+                    if(dist > 0.5) discard;
                     
-                    vec3 color1 = vec3(0.0, 0.94, 1.0);
-                    vec3 color2 = vec3(0.44, 0.0, 1.0);
+                    // Map height (elevation) to Cyan & Purple gradient
+                    vec3 color1 = vec3(0.0, 0.94, 1.0); // Cyan (Peaks)
+                    vec3 color2 = vec3(0.44, 0.0, 1.0); // Purple (Valleys)
                     
-                    float mixFactor = sin(vPosition.x * 0.5 + uTime * 0.5) * 0.5 + 0.5;
-                    vec3 finalColor = mix(color1, color2, mixFactor);
+                    // Normalize elevation for smooth color mixing
+                    float mixStrength = (vElevation + 3.0) / 6.0;
+                    mixStrength = clamp(mixStrength, 0.0, 1.0);
                     
-                    gl_FragColor = vec4(finalColor, 0.8);
+                    vec3 finalColor = mix(color2, color1, mixStrength);
+                    gl_FragColor = vec4(finalColor, 0.9);
                 }
             `;
 
-            // UPDATED MATERIAL: Passes the pixel ratio directly to the shader
             const material = new THREE.ShaderMaterial({
                 vertexShader, fragmentShader,
                 uniforms: { 
-                    uProgress: { value: 0 }, 
                     uTime: { value: 0 },
+                    uMousePos: { value: new THREE.Vector3(0,0,0) },
                     uPixelRatio: { value: Math.min(window.devicePixelRatio, 2.0) }
                 },
                 transparent: true, blending: THREE.AdditiveBlending, depthTest: false
             });
 
-            const particleSystem = new THREE.Points(geometry, material);
-            scene.add(particleSystem);
+            const points = new THREE.Points(geometry, material);
+            points.position.y = -8; // Lower the sea level
+            scene.add(points);
 
             const clock = new THREE.Clock();
             
-            // --- 5. PERFORMANCE OPTIMIZATION & MOUSE PARALLAX ---
             function animate3D() {
                 requestAnimationFrame(animate3D);
                 if (document.hidden) return; 
                 
-                const elapsedTime = clock.getElapsedTime();
-                material.uniforms.uTime.value = elapsedTime;
+                material.uniforms.uTime.value = clock.getElapsedTime();
                 
-                // Ambient rotation
-                particleSystem.rotation.y = elapsedTime * 0.05;
-                particleSystem.rotation.x = elapsedTime * 0.02;
+                // Smooth mouse follow for ripple effect
+                if(mouse3D) {
+                    material.uniforms.uMousePos.value.lerp(mouse3D, 0.05);
+                }
 
-                // Mouse Parallax Effect (Camera gently follows mouse)
-                targetX = mouseX * 0.001;
-                targetY = mouseY * 0.001;
-                camera.position.x += (targetX - camera.position.x) * 0.05;
-                camera.position.y += (-targetY - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
+                // Slow rotation of the entire scene based on scroll/time
+                points.rotation.y = Math.sin(clock.getElapsedTime() * 0.1) * 0.1;
 
                 renderer.render(scene, camera);
             }
             animate3D();
             
-            // UPDATED RESIZE LISTENER: Keeps resolution and particle size synced
             window.addEventListener('resize', () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
@@ -589,16 +544,9 @@
                 material.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2.0);
             });
 
-            // --- 6. GSAP SCROLL ANIMATIONS ---
+            // --- 5. GSAP SCROLL REVEALS ---
             gsap.registerPlugin(ScrollTrigger);
-            
-            gsap.to(material.uniforms.uProgress, {
-                value: 1, ease: "none",
-                scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 1 }
-            });
-
-            const revealElements = document.querySelectorAll(".gsap-reveal");
-            revealElements.forEach((el) => {
+            document.querySelectorAll(".gsap-reveal").forEach((el) => {
                 gsap.to(el, {
                     scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" },
                     opacity: 1, y: 0, duration: 0.8, ease: "power3.out"
