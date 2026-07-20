@@ -438,7 +438,7 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at center, transparent 30%, rgba(6, 6, 14, 0.7) 70%, rgba(6, 6, 14, 0.95) 100%);
+            background: radial-gradient(ellipse at center, transparent 15%, rgba(6, 6, 14, 0.75) 60%, rgba(6, 6, 14, 0.95) 100%);
             z-index: 1;
             pointer-events: none;
         }
@@ -472,11 +472,12 @@
             height: 16px;
             fill: var(--accent-cyan);
         }
+        /* ---- UPGRADED HERO TITLE ---- */
         .hero-title {
             font-size: clamp(2.6rem, 6vw, 5rem);
             font-weight: 900;
             line-height: 1.08;
-            letter-spacing: -0.02em;
+            letter-spacing: 0.02em;
             margin-bottom: 20px;
             animation: fadeInUp 0.8s 0.15s var(--transition-smooth) forwards;
             opacity: 0;
@@ -484,6 +485,22 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.3), 0 0 80px rgba(139, 92, 246, 0.3);
+            position: relative;
+        }
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-cyan);
+            animation: blink 1s step-end infinite;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
         }
         .hero-subtitle {
             font-size: clamp(1rem, 2vw, 1.25rem);
@@ -609,7 +626,7 @@
         .about-image {
             width: 100%;
             height: 100%;
-            object-fit: contain;  /* CHANGED from cover to contain to show full photo */
+            object-fit: contain;
             border-radius: var(--radius-lg);
             position: relative;
             z-index: 2;
