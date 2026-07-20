@@ -242,17 +242,21 @@
             border-bottom: 1px solid var(--glass-border);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
         }
+        /* Logo image styling */
         .nav-logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            letter-spacing: 0.03em;
-            color: var(--text-primary);
-            text-decoration: none;
+            display: flex;
+            align-items: center;
             z-index: 1001;
-            background: linear-gradient(135deg, #fff, #cbd5e1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        }
+        .nav-logo img {
+            height: 42px;
+            width: auto;
+            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.4));
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+        .nav-logo img:hover {
+            filter: drop-shadow(0 0 14px rgba(0, 212, 255, 0.7));
+            transform: scale(1.05);
         }
         .nav-links {
             display: flex;
@@ -1191,7 +1195,9 @@
 
     <!-- Navigation -->
     <nav class="nav" id="nav">
-        <a href="#" class="nav-logo">AM.</a>
+        <a href="#" class="nav-logo">
+            <img src="logo.png" alt="Amit Kumar Mishra Logo">
+        </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#hero" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -1606,15 +1612,12 @@
 
     <script>
         (function() {
-            // Dynamic year
             document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-            // Loading screen
             const loadingScreen = document.getElementById('loadingScreen');
             window.addEventListener('load', () => setTimeout(() => loadingScreen.classList.add('hidden'), 1800));
             setTimeout(() => loadingScreen.classList.add('hidden'), 3000);
 
-            // Custom cursor
             const cursorDot = document.getElementById('cursorDot');
             const cursorRing = document.getElementById('cursorRing');
             if (window.matchMedia('(min-width: 769px)').matches) {
@@ -1638,7 +1641,6 @@
                     });
             }
 
-            // Three.js hero
             const heroCanvas = document.getElementById('heroCanvas');
             let threeScene, threeCamera, threeRenderer, threeParticles, threeShapes = [];
             let animationId, mouseTargetX = 0, mouseTargetY = 0, currentMouseX = 0, currentMouseY = 0;
@@ -1735,7 +1737,6 @@
             if (threeScene) animateThreeJS();
             window.addEventListener('resize', resizeThreeJS);
 
-            // GSAP animations
             gsap.registerPlugin(ScrollTrigger);
             const animated = [
                 '#about .about-visual', '#about .about-text', '#services .service-card', '#skills .skill-tag',
@@ -1751,7 +1752,6 @@
                 });
             });
 
-            // Navigation
             const nav = document.getElementById('nav');
             const hamburger = document.getElementById('hamburger');
             const navLinks = document.getElementById('navLinks');
@@ -1782,20 +1782,15 @@
 
             backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-            // ==================== EmailJS (Real Sending) ====================
             emailjs.init("MDPRo2WpK5k4waaDu");
-
             const form = document.getElementById('contactForm');
             const toast = document.getElementById('toast');
-
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-
                 const btn = form.querySelector('button');
                 const originalHTML = btn.innerHTML;
                 btn.innerHTML = 'Sending...';
                 btn.disabled = true;
-
                 emailjs.sendForm('service_s2wag8q', 'template_8h1rv5o', form)
                     .then(() => {
                         btn.innerHTML = originalHTML;
@@ -1812,7 +1807,6 @@
                     });
             });
 
-            // IntersectionObserver for Three.js performance
             if (threeScene) {
                 const obs = new IntersectionObserver(entries => {
                     entries.forEach(entry => {
