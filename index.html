@@ -124,59 +124,25 @@
         .nav { position:fixed; top:0; left:0; width:100%; z-index:1000; height:var(--nav-height); transition:all 0.4s; padding:0 40px; display:flex; align-items:center; justify-content:space-between; background:transparent; }
         .nav.scrolled { background:rgba(6,6,14,0.85); backdrop-filter:blur(24px); border-bottom:1px solid var(--glass-border); box-shadow:0 4px 30px rgba(0,0,0,0.4); }
 
-        /* NEW 3D LOGO – SAM DEV */
+        /* SIMPLE NEON LOGO – ONLY TEXT */
         .nav-logo {
             display: flex;
             align-items: center;
             text-decoration: none;
             z-index: 1001;
         }
-        .nav-logo .logo-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            perspective: 600px;
-        }
-        .logo-cube {
-            width: 20px;
-            height: 20px;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: logoSpin 8s infinite linear;
-        }
-        .logo-cube.left { animation-delay: 0s; }
-        .logo-cube.right { animation-delay: -4s; }
-        .cube-face {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 1.5px solid var(--accent-cyan);
-            background: rgba(0, 212, 255, 0.08);
-            box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
-        }
-        .cube-face.front  { transform: translateZ(10px); }
-        .cube-face.back   { transform: rotateY(180deg) translateZ(10px); }
-        .cube-face.right  { transform: rotateY(90deg) translateZ(10px); }
-        .cube-face.left   { transform: rotateY(-90deg) translateZ(10px); }
-        .cube-face.top    { transform: rotateX(90deg) translateZ(10px); }
-        .cube-face.bottom { transform: rotateX(-90deg) translateZ(10px); }
-
         .logo-text {
             font-family: var(--font-mono);
             font-size: 1.6rem;
             font-weight: 900;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.04em;
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.6));
             animation: textPulse 3s ease-in-out infinite;
             line-height: 1;
-        }
-        @keyframes logoSpin {
-            0% { transform: rotateX(0deg) rotateY(0deg); }
-            100% { transform: rotateX(360deg) rotateY(360deg); }
         }
         @keyframes textPulse {
             0%, 100% { filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.4)); }
@@ -347,15 +313,7 @@
 
     <nav class="nav" id="nav">
         <a href="#" class="nav-logo">
-            <div class="logo-wrapper">
-                <div class="logo-cube left">
-                    <div class="cube-face front"></div><div class="cube-face back"></div><div class="cube-face right"></div><div class="cube-face left"></div><div class="cube-face top"></div><div class="cube-face bottom"></div>
-                </div>
-                <span class="logo-text">SAM DEV</span>
-                <div class="logo-cube right">
-                    <div class="cube-face front"></div><div class="cube-face back"></div><div class="cube-face right"></div><div class="cube-face left"></div><div class="cube-face top"></div><div class="cube-face bottom"></div>
-                </div>
-            </div>
+            <span class="logo-text">SAM DEV</span>
         </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#hero" class="active">Home</a></li>
@@ -522,7 +480,6 @@
 
     <script>
         (function() {
-            // loading
             const loadingScreen = document.getElementById('loadingScreen');
             const loadingFill = document.getElementById('loadingFill');
             const loadingPercent = document.getElementById('loadingPercent');
@@ -551,7 +508,6 @@
             fields.forEach(f => f.addEventListener('input', () => { f.classList.remove('error'); const e = f.parentElement.querySelector('.error-message'); if(e) e.classList.remove('visible'); }));
             if (form) form.addEventListener('submit', function(e) { e.preventDefault(); let v = true; fields.forEach(f => { const el = f.parentElement.querySelector('.error-message'); if (!f.validity.valid) { f.classList.add('error'); if(el) el.classList.add('visible'); v = false; } }); if (!v) return; const btn = form.querySelector('button'), orig = btn.innerHTML; btn.innerHTML = 'Sending...'; btn.disabled = true; emailjs.sendForm('service_s2wag8q','template_8h1rv5o',form).then(()=>{btn.innerHTML=orig;btn.disabled=false;form.reset();toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),3000)}).catch(err=>{btn.innerHTML=orig;btn.disabled=false;console.error(err);toastMsg.textContent='✗ Failed to send.';toast.classList.add('error','show');setTimeout(()=>toast.classList.remove('error','show'),3000)}); });
 
-            // three.js hero (original)
             const heroCanvas = document.getElementById('heroCanvas');
             let threeScene, threeCamera, threeRenderer, threeParticles, threeShapes = [], animationId, mTx=0,mTy=0,cMx=0,cMy=0;
             function initThreeJS() {
