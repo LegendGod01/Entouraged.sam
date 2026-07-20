@@ -18,14 +18,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         :root {
@@ -184,29 +181,13 @@
             width: 0%;
         }
         @keyframes loadingPulse {
-            0%,
-            100% {
-                opacity: 0.7;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.04);
-            }
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.04); }
         }
         @keyframes loadingBar {
-            0% {
-                width: 0%;
-                margin-left: 0;
-            }
-            50% {
-                width: 70%;
-                margin-left: 15%;
-            }
-            100% {
-                width: 0%;
-                margin-left: 100%;
-            }
+            0% { width: 0%; margin-left: 0; }
+            50% { width: 70%; margin-left: 15%; }
+            100% { width: 0%; margin-left: 100%; }
         }
 
         /* Navigation */
@@ -389,7 +370,8 @@
             padding: 0 24px;
         }
         .hero-badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             padding: 8px 20px;
             border: 1px solid var(--glass-border);
             border-radius: 50px;
@@ -448,6 +430,10 @@
             font-family: var(--font-primary);
             position: relative;
             overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         .btn-primary {
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
@@ -469,14 +455,8 @@
             transform: translateY(-3px);
         }
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(28px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Sections General */
@@ -498,6 +478,7 @@
             text-transform: uppercase;
             margin-bottom: 12px;
             font-weight: 500;
+            display: block;
         }
         .section-title {
             font-size: clamp(2rem, 4vw, 3.2rem);
@@ -538,15 +519,12 @@
             overflow: hidden;
             box-shadow: var(--card-shadow);
         }
-        .about-visual-inner {
-            font-size: 8rem;
-            font-weight: 900;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.04em;
-            user-select: none;
+        .about-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
         }
         .about-visual-glow {
             position: absolute;
@@ -556,18 +534,12 @@
             background: radial-gradient(circle, var(--accent-cyan-glow) 0%, transparent 70%);
             pointer-events: none;
             animation: floatGlow 6s ease-in-out infinite;
+            z-index: 1;
         }
         @keyframes floatGlow {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(30px, -30px) scale(1.2);
-            }
-            66% {
-                transform: translate(-20px, 20px) scale(0.9);
-            }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.2); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
         }
         .about-text h3 {
             font-size: 1.6rem;
@@ -660,10 +632,14 @@
             opacity: 1;
         }
         .service-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             display: block;
             transition: transform 0.4s var(--transition-bounce);
+        }
+        .service-icon svg {
+            width: 42px;
+            height: 42px;
+            stroke: var(--accent-cyan);
         }
         .service-card:hover .service-icon {
             transform: scale(1.1) rotate(-5deg);
@@ -770,13 +746,18 @@
         }
         .portfolio-card-image {
             height: 200px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.1));
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(139, 92, 246, 0.08));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
             position: relative;
             overflow: hidden;
+        }
+        .portfolio-card-image svg {
+            width: 56px;
+            height: 56px;
+            stroke: var(--accent-purple);
+            opacity: 0.9;
         }
         .portfolio-card-image::after {
             content: '';
@@ -818,6 +799,12 @@
             width: 18px;
             height: 18px;
             fill: currentColor;
+            stroke: none;
+        }
+        .portfolio-link svg.stroke-icon {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
         }
         @media (max-width: 480px) {
             .portfolio-grid {
@@ -947,7 +934,11 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            font-size: 1.2rem;
+        }
+        .contact-info-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--accent-cyan);
         }
         .contact-social-links {
             display: flex;
@@ -1085,29 +1076,24 @@
             transition: transform 0.4s var(--transition-bounce);
             pointer-events: none;
             font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .toast.show {
             transform: translateX(-50%) translateY(0);
         }
 
         /* Utility */
-        .text-center {
-            text-align: center;
-        }
-        .mt-48 {
-            margin-top: 48px;
-        }
-        .mb-24 {
-            margin-bottom: 24px;
-        }
+        .text-center { text-align: center; }
+        .mt-48 { margin-top: 48px; }
+        .mb-24 { margin-bottom: 24px; }
         @media (max-width: 768px) {
             :root {
                 --section-padding: 80px 0;
                 --nav-height: 64px;
             }
-            section {
-                padding: var(--section-padding);
-            }
+            section { padding: var(--section-padding); }
         }
     </style>
 </head>
@@ -1126,7 +1112,10 @@
     <div class="cursor-ring" id="cursorRing"></div>
 
     <!-- Toast -->
-    <div class="toast" id="toast">Message sent successfully! 🚀</div>
+    <div class="toast" id="toast">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        Message sent successfully!
+    </div>
 
     <!-- Navigation -->
     <nav class="nav" id="nav">
@@ -1150,7 +1139,10 @@
         <canvas class="hero-canvas" id="heroCanvas"></canvas>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <div class="hero-badge">🚀 Full Stack Developer & Cyber Security Specialist</div>
+            <div class="hero-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="m13 2-2 2.5h3L11 22l2-2.5h-3L13 2z"/></svg> 
+                Full Stack Developer & Cyber Security Specialist
+            </div>
             <h1 class="hero-title">Building The Future With Code, Security & Innovation</h1>
             <p class="hero-subtitle">I create powerful digital experiences, scalable applications, secure systems, and next-generation technology solutions.</p>
             <div class="hero-buttons">
@@ -1165,9 +1157,10 @@
     <section id="about">
         <div class="section-container">
             <div class="about-grid">
+                <!-- Replaced text with your image -->
                 <div class="about-visual">
                     <div class="about-visual-glow"></div>
-                    <span class="about-visual-inner">AM</span>
+                    <img src="16428.png" alt="Amit Kumar Mishra" class="about-image">
                 </div>
                 <div class="about-text">
                     <span class="section-label">01 / About</span>
@@ -1175,14 +1168,12 @@
                     <p>I am <strong>Amit Kumar Mishra</strong>, a passionate technology professional specializing in software development, cybersecurity, and innovative digital solutions.</p>
                     <p>I help businesses build modern websites, applications, secure platforms, and custom technology solutions that drive growth and deliver exceptional user experiences.</p>
                     <div class="about-socials">
-                        <!-- GitHub with SVG logo -->
                         <a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="about-social-link">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                                 <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                             </svg>
                             GitHub Profile
                         </a>
-                        <!-- Instagram with SVG logo -->
                         <a href="https://www.instagram.com/entouraged.sam" target="_blank" rel="noopener" class="about-social-link">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
@@ -1202,8 +1193,11 @@
             <h2 class="section-title">What I <span class="gradient-text">Offer</span></h2>
             <p class="section-desc">Comprehensive technology solutions tailored to your business needs — from web development to cybersecurity and AI automation.</p>
             <div class="services-grid">
+                <!-- SVGs Replacing Emojis -->
                 <div class="service-card">
-                    <span class="service-icon">🚀</span>
+                    <span class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    </span>
                     <h3>Website Development</h3>
                     <ul>
                         <li>Premium business websites</li>
@@ -1214,7 +1208,9 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <span class="service-icon">💻</span>
+                    <span class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                    </span>
                     <h3>Full Stack Development</h3>
                     <ul>
                         <li>Frontend development</li>
@@ -1225,7 +1221,9 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <span class="service-icon">🔐</span>
+                    <span class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </span>
                     <h3>Cyber Security Solutions</h3>
                     <ul>
                         <li>Security audits</li>
@@ -1236,7 +1234,9 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <span class="service-icon">🤖</span>
+                    <span class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                    </span>
                     <h3>AI & Automation Solutions</h3>
                     <ul>
                         <li>AI-powered applications</li>
@@ -1246,7 +1246,9 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <span class="service-icon">⚡</span>
+                    <span class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    </span>
                     <h3>Custom Software Solutions</h3>
                     <ul>
                         <li>Enterprise software</li>
@@ -1256,7 +1258,9 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <span class="service-icon">🎨</span>
+                    <span class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    </span>
                     <h3>UI/UX Design</h3>
                     <ul>
                         <li>Modern interfaces</li>
@@ -1266,7 +1270,9 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <span class="service-icon">☁</span>
+                    <span class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+                    </span>
                     <h3>Cloud & DevOps Solutions</h3>
                     <ul>
                         <li>Deployment solutions</li>
@@ -1302,64 +1308,70 @@
         </div>
     </section>
 
-    <!-- Portfolio Section (Updated with Live Projects) -->
+    <!-- Portfolio Section -->
     <section id="portfolio" style="background: var(--bg-secondary);">
         <div class="section-container">
             <span class="section-label">04 / Portfolio</span>
             <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
             <p class="section-desc">Explore my latest work showcasing innovative solutions, secure architectures, and modern digital experiences.</p>
             <div class="portfolio-grid">
-                <!-- Project 1: SAM AI v2 -->
+                <!-- Project 1 -->
                 <div class="portfolio-card">
-                    <div class="portfolio-card-image">🤖</div>
+                    <div class="portfolio-card-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                    </div>
                     <div class="portfolio-card-body">
                         <h3>SAM AI v2</h3>
                         <p>An advanced AI‑powered assistant platform with natural language processing and intelligent automation capabilities.</p>
                         <div class="portfolio-links">
                             <a href="https://sam-ai-v2-psi.vercel.app/" target="_blank" rel="noopener" class="portfolio-link">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                <svg class="stroke-icon" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 Live Demo
                             </a>
                             <a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="portfolio-link">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                                 GitHub
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 2: RailPulse -->
+                <!-- Project 2 -->
                 <div class="portfolio-card">
-                    <div class="portfolio-card-image">🚆</div>
+                    <div class="portfolio-card-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    </div>
                     <div class="portfolio-card-body">
                         <h3>RailPulse</h3>
                         <p>Real‑time railway analytics and monitoring dashboard with predictive insights for operational efficiency.</p>
                         <div class="portfolio-links">
                             <a href="https://railpulse-six.vercel.app/" target="_blank" rel="noopener" class="portfolio-link">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                <svg class="stroke-icon" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 Live Demo
                             </a>
                             <a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="portfolio-link">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                                 GitHub
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 3: Leak Hunter Pro -->
+                <!-- Project 3 -->
                 <div class="portfolio-card">
-                    <div class="portfolio-card-image">🔍</div>
+                    <div class="portfolio-card-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </div>
                     <div class="portfolio-card-body">
                         <h3>Leak Hunter Pro</h3>
                         <p>Advanced cybersecurity tool for detecting data leaks, vulnerabilities, and exposure across digital assets.</p>
                         <div class="portfolio-links">
                             <a href="https://leak-hunter-pro.vercel.app/" target="_blank" rel="noopener" class="portfolio-link">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                <svg class="stroke-icon" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                 Live Demo
                             </a>
                             <a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="portfolio-link">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                                 GitHub
                             </a>
                         </div>
@@ -1368,7 +1380,7 @@
             </div>
             <div class="text-center mt-48">
                 <a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="btn btn-secondary">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right:8px;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right:4px;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                     Explore All Projects on GitHub
                 </a>
             </div>
@@ -1450,16 +1462,23 @@
                         <option>Other</option>
                     </select>
                     <textarea placeholder="Tell me about your project..." required aria-label="Project Details"></textarea>
-                    <button type="submit" class="btn btn-primary">Send Inquiry 🚀</button>
+                    <button type="submit" class="btn btn-primary">
+                        Send Inquiry
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 2px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
                 </form>
                 <div class="contact-info-card">
                     <h3>Get In Touch</h3>
                     <div class="contact-info-item">
-                        <div class="contact-info-icon">📧</div>
+                        <div class="contact-info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
                         <span>Sam.redefine@gmail.com</span>
                     </div>
                     <div class="contact-info-item">
-                        <div class="contact-info-icon">📍</div>
+                        <div class="contact-info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </div>
                         <span>Available for remote & worldwide projects</span>
                     </div>
                     <div class="contact-social-links">
@@ -1488,7 +1507,11 @@
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <span>© 2026 All Rights Reserved — Built with 🔒 Security & Innovation</span>
+            <span>
+                © 2026 All Rights Reserved — Built with 
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin: 0 4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> 
+                Security & Innovation
+            </span>
         </div>
     </footer>
 
@@ -1813,13 +1836,13 @@
             contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const btn = contactForm.querySelector('button');
-                const originalText = btn.textContent;
+                const originalText = btn.innerHTML;
                 btn.textContent = 'Sending...';
                 btn.disabled = true;
                 btn.style.opacity = '0.7';
 
                 setTimeout(() => {
-                    btn.textContent = originalText;
+                    btn.innerHTML = originalText;
                     btn.disabled = false;
                     btn.style.opacity = '1';
                     contactForm.reset();
@@ -1844,13 +1867,13 @@
                 heroObserver.observe(document.getElementById('hero'));
             }
 
-            console.log('%c🚀 Amit Kumar Mishra — Portfolio Ready %c| %cBuilding The Future With Code, Security & Innovation',
+            console.log('%c Amit Kumar Mishra — Portfolio Ready %c| %cBuilding The Future With Code, Security & Innovation',
                 'color: #00d4ff; font-size: 1.2em; font-weight: bold;',
                 'color: #fff;',
                 'color: #8b5cf6;');
-            console.log('%c🔐 Secure • ⚡ Innovative • 🎯 Future-Ready',
+            console.log('%c Secure • Innovative • Future-Ready',
                 'color: #c9a96e; font-size: 0.9em;');
-            console.log('%c📧 Sam.redefine@gmail.com %c| %c🐙 github.com/LegendGod01',
+            console.log('%c Sam.redefine@gmail.com %c| %c github.com/LegendGod01',
                 'color: #b0b0c8;', 'color: #6b6b80;', 'color: #b0b0c8;');
 
         })();
