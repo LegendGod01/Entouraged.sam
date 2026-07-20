@@ -69,66 +69,57 @@
         .cursor-dot.magnetic { width:14px; height:14px; background:#fff; }
         @media (max-width:768px) { .cursor-dot,.cursor-ring { display:none; } body { cursor:auto; } }
 
-        /* LOADING SCREEN – GEEKY HACKER BOOT */
+        /* ---- LOADING SCREEN – CLEAN + GEEKY ACCENT ---- */
         .loading-screen {
             position: fixed; top:0; left:0; width:100%; height:100%;
-            background: #02020a;
+            background: #06060e;
             z-index: 100000;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-            font-family: var(--font-mono);
-            color: #0f0;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
         .loading-screen.hidden { opacity:0; visibility:hidden; pointer-events:none; }
-        .boot-sequence {
-            width: 80%;
-            max-width: 600px;
-            text-align: left;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            padding: 20px;
-            border: 1px solid rgba(0,255,0,0.2);
-            background: rgba(0,0,0,0.6);
-            box-shadow: 0 0 20px rgba(0,255,0,0.3);
-            white-space: pre-wrap;
-        }
-        .boot-line { opacity: 0; }
-        .glitch-text {
-            font-size: 2.2rem;
+        .loading-logo {
+            font-size: 2.4rem;
             font-weight: 900;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #0f0;
-            text-shadow: 0 0 10px #0f0;
-            animation: glitch 1.2s infinite;
+            letter-spacing: 0.06em;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 0 15px rgba(0,212,255,0.6));
         }
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(2px, -2px); }
-            60% { transform: translate(-2px, -2px); }
-            80% { transform: translate(2px, 2px); }
-            100% { transform: translate(0); }
+        .loading-tagline {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            letter-spacing: 0.12em;
+            margin-bottom: 28px;
+            opacity: 0.8;
         }
-        .cursor-blink { display: inline-block; width: 8px; height: 16px; background: #0f0; margin-left: 4px; animation: blink 0.8s infinite; }
-        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
-        .loading-bar-geek {
-            width: 250px;
-            height: 4px;
-            background: rgba(0,255,0,0.15);
-            margin-top: 25px;
-            border-radius: 2px;
+        .loading-bar-track {
+            width: 220px;
+            height: 3px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 3px;
             overflow: hidden;
         }
-        .loading-bar-fill-geek {
+        .loading-bar-fill {
             height: 100%;
-            background: #0f0;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 3px;
             width: 0%;
-            transition: width 0.3s ease;
-            box-shadow: 0 0 12px #0f0;
+            box-shadow: 0 0 10px rgba(0,212,255,0.6);
+        }
+        .loading-digits {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            letter-spacing: 0.1em;
         }
 
         .nav { position:fixed; top:0; left:0; width:100%; z-index:1000; height:var(--nav-height); transition:all 0.4s; padding:0 40px; display:flex; align-items:center; justify-content:space-between; background:transparent; }
@@ -283,20 +274,14 @@
     <a href="#main-content" class="skip-nav">Skip to main content</a>
     <div class="progress-bar" id="progressBar"></div>
 
-    <!-- GEEKY LOADING SCREEN -->
+    <!-- LOADING SCREEN – AMIT MISHRA + GEEKY TOUCH -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="glitch-text">INITIALIZING<span class="cursor-blink"></span></div>
-        <div class="boot-sequence" id="bootSequence">
-            <div class="boot-line">> Loading kernel modules...</div>
-            <div class="boot-line">> Establishing secure connection...</div>
-            <div class="boot-line">> Mounting encrypted volumes...</div>
-            <div class="boot-line">> Initializing neural interface...</div>
-            <div class="boot-line">> Running system diagnostics...</div>
-            <div class="boot-line">> Access granted.</div>
+        <div class="loading-logo">AMIT MISHRA</div>
+        <div class="loading-tagline">&lt; systems initializing /&gt;</div>
+        <div class="loading-bar-track">
+            <div class="loading-bar-fill" id="loadingFill"></div>
         </div>
-        <div class="loading-bar-geek">
-            <div class="loading-bar-fill-geek" id="bootProgressBar"></div>
-        </div>
+        <div class="loading-digits" id="loadingPercent">00%</div>
     </div>
 
     <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
@@ -441,50 +426,16 @@
             <p class="section-desc">Have a project in mind? Let's discuss how I can help bring your vision to life with secure, innovative technology.</p>
             <div class="contact-grid">
                 <form id="contactForm" class="contact-form" novalidate>
-                    <div class="form-group">
-                        <input type="text" name="from_name" placeholder="Your Name" required>
-                        <div class="error-message" data-error="from_name">Please enter your name</div>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="reply_to" placeholder="Your Email" required>
-                        <div class="error-message" data-error="reply_to">Please enter a valid email</div>
-                    </div>
-                    <div class="form-group">
-                        <select name="project_type">
-                            <option value="">Project Type</option>
-                            <option>Website Development</option>
-                            <option>Full Stack Development</option>
-                            <option>Cyber Security</option>
-                            <option>AI & Automation</option>
-                            <option>Custom Software</option>
-                            <option>UI/UX Design</option>
-                            <option>Cloud & DevOps</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" placeholder="Tell me about your project..." required></textarea>
-                        <div class="error-message" data-error="message">Please describe your project</div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;"><line x1="22" y1="2" x2="11" y2="13"/><polyline points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                        Send Inquiry
-                    </button>
+                    <div class="form-group"><input type="text" name="from_name" placeholder="Your Name" required><div class="error-message" data-error="from_name">Please enter your name</div></div>
+                    <div class="form-group"><input type="email" name="reply_to" placeholder="Your Email" required><div class="error-message" data-error="reply_to">Please enter a valid email</div></div>
+                    <div class="form-group"><select name="project_type"><option value="">Project Type</option><option>Website Development</option><option>Full Stack Development</option><option>Cyber Security</option><option>AI & Automation</option><option>Custom Software</option><option>UI/UX Design</option><option>Cloud & DevOps</option><option>Other</option></select></div>
+                    <div class="form-group"><textarea name="message" placeholder="Tell me about your project..." required></textarea><div class="error-message" data-error="message">Please describe your project</div></div>
+                    <button type="submit" class="btn btn-primary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;"><line x1="22" y1="2" x2="11" y2="13"/><polyline points="22 2 15 22 11 13 2 9 22 2"/></svg>Send Inquiry</button>
                 </form>
                 <div class="contact-info-card glass-card">
                     <h3>Get In Touch</h3>
-                    <div class="contact-info-item">
-                        <div class="contact-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                        <span id="contactEmail">Sam.redefine@gmail.com</span>
-                        <button class="copy-email-btn" id="copyEmailBtn" title="Copy email">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
-                        </button>
-                        <span class="copied-tooltip" id="copiedTooltip">Copied!</span>
-                    </div>
-                    <div class="contact-info-item">
-                        <div class="contact-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 6.9 8 11.7z"/></svg></div>
-                        <span>Available for remote & worldwide projects</span>
-                    </div>
+                    <div class="contact-info-item"><div class="contact-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><span id="contactEmail">Sam.redefine@gmail.com</span><button class="copy-email-btn" id="copyEmailBtn" title="Copy email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg></button><span class="copied-tooltip" id="copiedTooltip">Copied!</span></div>
+                    <div class="contact-info-item"><div class="contact-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 6.9 8 11.7z"/></svg></div><span>Available for remote & worldwide projects</span></div>
                     <div class="contact-social-links">
                         <a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="contact-social-btn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a>
                         <a href="https://www.instagram.com/entouraged.sam" target="_blank" rel="noopener" class="contact-social-btn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>Instagram</a>
@@ -497,9 +448,7 @@
     <footer class="footer">
         <div class="footer-inner">
             <span class="footer-brand">Amit Kumar Mishra</span>
-            <ul class="footer-links">
-                <li><a href="#hero">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#contact">Contact</a></li>
-            </ul>
+            <ul class="footer-links"><li><a href="#hero">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#contact">Contact</a></li></ul>
             <span>© <span id="currentYear"></span> All Rights Reserved — Built with <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Security & Innovation</span>
         </div>
     </footer>
@@ -508,45 +457,41 @@
 
     <script>
         (function() {
-            // ===== GEEKY LOADING SEQUENCE =====
+            // ===== FAST GEEKY LOADING =====
             const loadingScreen = document.getElementById('loadingScreen');
-            const bootLines = document.querySelectorAll('.boot-line');
-            const bootProgress = document.getElementById('bootProgressBar');
-            const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toastMsg');
+            const loadingFill = document.getElementById('loadingFill');
+            const loadingPercent = document.getElementById('loadingPercent');
             
-            // Animate boot lines sequentially
-            let lineDelay = 0;
-            bootLines.forEach((line, i) => {
-                gsap.to(line, { opacity: 1, duration: 0.4, delay: lineDelay + 0.2, ease: "power2.out" });
-                lineDelay += 0.6;
-            });
-            
-            // Animate progress bar
-            gsap.to(bootProgress, { width: "100%", duration: lineDelay + 0.5, ease: "power2.in" });
-            
-            // Hide loading screen when everything is ready
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    gsap.to(loadingScreen, { opacity: 0, duration: 0.6, onComplete: () => {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 30;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    loadingFill.style.width = '100%';
+                    loadingPercent.textContent = 'OK';
+                    setTimeout(() => {
                         loadingScreen.classList.add('hidden');
-                    }});
-                }, lineDelay * 1000 + 1200);
-            });
-            
-            // Fallback: hide after 5 seconds even if load event hasn't fired
-            setTimeout(() => {
-                if (!loadingScreen.classList.contains('hidden')) {
-                    gsap.to(loadingScreen, { opacity: 0, duration: 0.5, onComplete: () => {
-                        loadingScreen.classList.add('hidden');
-                    }});
+                    }, 350);
+                } else {
+                    loadingFill.style.width = progress + '%';
+                    loadingPercent.textContent = Math.floor(progress) + '%';
                 }
-            }, 5000);
+            }, 200);
 
-            // ===== REST OF THE CODE (unchanged) =====
+            window.addEventListener('load', () => {
+                progress = 100;
+                clearInterval(interval);
+                loadingFill.style.width = '100%';
+                loadingPercent.textContent = 'OK';
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                }, 350);
+            });
+
+            // ===== REST UNCHANGED =====
             document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-            // Scroll progress bar
             const progressBar = document.getElementById('progressBar');
             window.addEventListener('scroll', () => {
                 const scrollTop = window.scrollY;
@@ -555,7 +500,6 @@
                 progressBar.style.width = scrollPercent + '%';
             });
 
-            // Magnetic cursor
             const cursorDot = document.getElementById('cursorDot');
             const cursorRing = document.getElementById('cursorRing');
             let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
@@ -564,278 +508,64 @@
                 mouseY = e.clientY;
                 cursorDot.style.transform = `translate(${mouseX - 5}px, ${mouseY - 5}px)`;
             });
-            function animateRing() {
-                ringX += (mouseX - ringX) * 0.2;
-                ringY += (mouseY - ringY) * 0.2;
-                cursorRing.style.transform = `translate(${ringX - 22}px, ${ringY - 22}px)`;
-                requestAnimationFrame(animateRing);
-            }
+            function animateRing() { ringX += (mouseX - ringX) * 0.2; ringY += (mouseY - ringY) * 0.2; cursorRing.style.transform = `translate(${ringX - 22}px, ${ringY - 22}px)`; requestAnimationFrame(animateRing); }
             animateRing();
-            const hoverTargets = document.querySelectorAll('a, button, .btn, .service-card, .portfolio-card, .skill-tag, .why-card, input, textarea, select, .hamburger');
-            hoverTargets.forEach(el => {
+            document.querySelectorAll('a, button, .btn, .service-card, .portfolio-card, .skill-tag, .why-card, input, textarea, select, .hamburger').forEach(el => {
                 el.addEventListener('mouseenter', () => { cursorRing.classList.add('hover'); cursorDot.classList.add('magnetic'); });
                 el.addEventListener('mouseleave', () => { cursorRing.classList.remove('hover'); cursorDot.classList.remove('magnetic'); });
             });
 
-            // Copy email functionality
             const copyBtn = document.getElementById('copyEmailBtn');
             const tooltip = document.getElementById('copiedTooltip');
-            if(copyBtn) {
-                copyBtn.addEventListener('click', () => {
-                    navigator.clipboard.writeText('Sam.redefine@gmail.com').then(() => {
-                        tooltip.classList.add('show');
-                        setTimeout(() => tooltip.classList.remove('show'), 2000);
-                    });
-                });
-            }
+            if(copyBtn) copyBtn.addEventListener('click', () => { navigator.clipboard.writeText('Sam.redefine@gmail.com').then(() => { tooltip.classList.add('show'); setTimeout(() => tooltip.classList.remove('show'), 2000); }); });
 
-            // Live form validation
             const form = document.getElementById('contactForm');
             const fields = form ? form.querySelectorAll('input, textarea') : [];
-            fields.forEach(field => {
-                field.addEventListener('input', () => {
-                    field.classList.remove('error');
-                    const errorEl = field.parentElement.querySelector('.error-message');
-                    if (errorEl) errorEl.classList.remove('visible');
-                });
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            fields.forEach(field => { field.addEventListener('input', () => { field.classList.remove('error'); const el = field.parentElement.querySelector('.error-message'); if(el) el.classList.remove('visible'); }); });
+            if(form) form.addEventListener('submit', function(e) {
+                e.preventDefault(); let valid = true;
+                fields.forEach(field => { const el = field.parentElement.querySelector('.error-message'); if(!field.validity.valid) { field.classList.add('error'); if(el) el.classList.add('visible'); valid = false; } });
+                if(!valid) return;
+                const btn = form.querySelector('button'); const orig = btn.innerHTML; btn.innerHTML = 'Sending...'; btn.disabled = true;
+                emailjs.sendForm('service_s2wag8q', 'template_8h1rv5o', form)
+                    .then(() => { btn.innerHTML = orig; btn.disabled = false; form.reset(); toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3000); })
+                    .catch(err => { btn.innerHTML = orig; btn.disabled = false; console.error(err); toastMsg.textContent = '✗ Failed to send.'; toast.classList.add('error','show'); setTimeout(() => toast.classList.remove('error','show'), 3000); });
             });
 
-            if(form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    let valid = true;
-                    fields.forEach(field => {
-                        const errorEl = field.parentElement.querySelector('.error-message');
-                        if (!field.validity.valid) {
-                            field.classList.add('error');
-                            if (errorEl) errorEl.classList.add('visible');
-                            valid = false;
-                        }
-                    });
-                    if (!valid) return;
-
-                    const btn = form.querySelector('button');
-                    const originalHTML = btn.innerHTML;
-                    btn.innerHTML = 'Sending...';
-                    btn.disabled = true;
-                    emailjs.sendForm('service_s2wag8q', 'template_8h1rv5o', form)
-                        .then(() => {
-                            btn.innerHTML = originalHTML;
-                            btn.disabled = false;
-                            form.reset();
-                            toast.classList.add('show');
-                            setTimeout(() => toast.classList.remove('show'), 3000);
-                        })
-                        .catch((error) => {
-                            btn.innerHTML = originalHTML;
-                            btn.disabled = false;
-                            console.error('EmailJS error:', error);
-                            toastMsg.textContent = '✗ Failed to send. Please try again.';
-                            toast.classList.add('error', 'show');
-                            setTimeout(() => toast.classList.remove('error', 'show'), 3000);
-                        });
-                });
-            }
-
-            // Three.js hero
             const heroCanvas = document.getElementById('heroCanvas');
-            let threeScene, threeCamera, threeRenderer, threeParticles, threeShapes = [];
-            let animationId;
-            let mouseTargetX = 0, mouseTargetY = 0, currentMouseX = 0, currentMouseY = 0;
-
+            let threeScene, threeCamera, threeRenderer, threeParticles, threeShapes = [], animationId, mTx=0,mTy=0,cMx=0,cMy=0;
             function initThreeJS() {
                 try {
-                    const hero = document.getElementById('hero');
-                    const rect = hero.getBoundingClientRect();
-                    threeScene = new THREE.Scene();
-                    threeCamera = new THREE.PerspectiveCamera(60, rect.width / Math.max(rect.height, 1), 0.1, 50);
-                    threeCamera.position.set(0, 0.5, 7);
-                    threeCamera.lookAt(0, 0, 0);
-                    threeRenderer = new THREE.WebGLRenderer({ canvas: heroCanvas, alpha: true, antialias: true });
-                    threeRenderer.setSize(rect.width, rect.height);
-                    threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-                    threeRenderer.setClearColor(0x000000, 0);
-                    const ambient = new THREE.AmbientLight(0x222244, 0.6);
-                    threeScene.add(ambient);
-                    const point1 = new THREE.PointLight(0x00d4ff, 1.5, 20);
-                    point1.position.set(3, 2, 4);
-                    threeScene.add(point1);
-                    const point2 = new THREE.PointLight(0x8b5cf6, 1.2, 18);
-                    point2.position.set(-3, -1, 3);
-                    threeScene.add(point2);
-
-                    const sphereGeo = new THREE.SphereGeometry(0.4, 32, 32);
-                    const sphereMat = new THREE.MeshBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.15, depthWrite: false });
-                    const sphere = new THREE.Mesh(sphereGeo, sphereMat);
-                    sphere.position.set(0, 0.2, -1.5);
-                    threeScene.add(sphere);
-                    threeShapes.push(sphere);
-
-                    const particleCount = window.innerWidth < 768 ? 1200 : 2500;
-                    const geom = new THREE.BufferGeometry();
-                    const pos = new Float32Array(particleCount * 3);
-                    const col = new Float32Array(particleCount * 3);
-                    for (let i = 0; i < particleCount; i++) {
-                        pos[i * 3] = (Math.random() - 0.5) * 16;
-                        pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
-                        pos[i * 3 + 2] = (Math.random() - 0.5) * 12 - 2;
-                        const choice = Math.random();
-                        if (choice < 0.4) { col[i*3]=0; col[i*3+1]=0.83; col[i*3+2]=1; }
-                        else if (choice < 0.7) { col[i*3]=0.55; col[i*3+1]=0.36; col[i*3+2]=0.96; }
-                        else { col[i*3]=0.9; col[i*3+1]=0.9; col[i*3+2]=1; }
-                    }
-                    geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-                    geom.setAttribute('color', new THREE.BufferAttribute(col, 3));
-                    const mat = new THREE.PointsMaterial({ size: 0.025, vertexColors: true, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: 0.8 });
-                    threeParticles = new THREE.Points(geom, mat);
-                    threeScene.add(threeParticles);
-
-                    const shapes = [
-                        { geo: new THREE.IcosahedronGeometry(0.9, 1), pos: [2.2,0.4,-2.5], col:0x00d4ff, rot:[0.004,0.006,0.002] },
-                        { geo: new THREE.TorusKnotGeometry(0.55,0.15,80,16), pos:[-2.4,-0.2,-3.2], col:0x8b5cf6, rot:[0.005,0.003,0.007] },
-                        { geo: new THREE.OctahedronGeometry(0.6,0), pos:[0.3,1.6,-4], col:0x3b82f6, rot:[0.003,0.008,0.004] },
-                        { geo: new THREE.TorusGeometry(0.7,0.06,16,48), pos:[-1.5,-1.1,-3], col:0x00d4ff, rot:[0.006,0.002,0.005] },
-                        { geo: new THREE.SphereGeometry(0.35,16,16), pos:[1.8,-0.9,-2.8], col:0xc9a96e, rot:[0.005,0.005,0.003] },
-                    ];
-                    shapes.forEach(s => {
-                        const material = new THREE.MeshBasicMaterial({ color: s.col, wireframe: true, transparent: true, opacity: 0.55, depthWrite: false });
-                        const mesh = new THREE.Mesh(s.geo, material);
-                        mesh.position.set(...s.pos);
-                        mesh.userData = { rotSpeed: s.rot };
-                        threeScene.add(mesh);
-                        threeShapes.push(mesh);
-                    });
-
-                    const ringGeo = new THREE.TorusGeometry(1.3, 0.015, 8, 80);
-                    const ringMat = new THREE.MeshBasicMaterial({ color: 0x00d4ff, wireframe: true, transparent: true, opacity: 0.3, depthWrite: false });
-                    const ring = new THREE.Mesh(ringGeo, ringMat);
-                    ring.position.set(0, -0.3, -2);
-                    ring.rotation.x = Math.PI / 3;
-                    ring.userData = { rotSpeed: [0.002,0.009,0.001] };
-                    threeScene.add(ring);
-                    threeShapes.push(ring);
-                } catch (e) { threeScene = null; }
+                    const h = document.getElementById('hero'), r = h.getBoundingClientRect();
+                    threeScene = new THREE.Scene(); threeCamera = new THREE.PerspectiveCamera(60, r.width/Math.max(r.height,1), 0.1, 50); threeCamera.position.set(0,0.5,7); threeCamera.lookAt(0,0,0);
+                    threeRenderer = new THREE.WebGLRenderer({canvas:heroCanvas, alpha:true, antialias:true}); threeRenderer.setSize(r.width,r.height); threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio,2)); threeRenderer.setClearColor(0,0);
+                    threeScene.add(new THREE.AmbientLight(0x222244,0.6)); const p1=new THREE.PointLight(0x00d4ff,1.5,20); p1.position.set(3,2,4); threeScene.add(p1); const p2=new THREE.PointLight(0x8b5cf6,1.2,18); p2.position.set(-3,-1,3); threeScene.add(p2);
+                    const sg=new THREE.SphereGeometry(0.4,32,32), sm=new THREE.MeshBasicMaterial({color:0x00d4ff,transparent:true,opacity:0.15,depthWrite:false}), sp=new THREE.Mesh(sg,sm); sp.position.set(0,0.2,-1.5); threeScene.add(sp); threeShapes.push(sp);
+                    const pc=window.innerWidth<768?1200:2500, g=new THREE.BufferGeometry(), pos=new Float32Array(pc*3), col=new Float32Array(pc*3);
+                    for(let i=0;i<pc;i++){pos[i*3]=(Math.random()-0.5)*16;pos[i*3+1]=(Math.random()-0.5)*10;pos[i*3+2]=(Math.random()-0.5)*12-2;const c=Math.random();if(c<0.4){col[i*3]=0;col[i*3+1]=0.83;col[i*3+2]=1}else if(c<0.7){col[i*3]=0.55;col[i*3+1]=0.36;col[i*3+2]=0.96}else{col[i*3]=0.9;col[i*3+1]=0.9;col[i*3+2]=1}}
+                    g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('color',new THREE.BufferAttribute(col,3));threeParticles=new THREE.Points(g,new THREE.PointsMaterial({size:0.025,vertexColors:true,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:0.8}));threeScene.add(threeParticles);
+                    [{geo:new THREE.IcosahedronGeometry(0.9,1),pos:[2.2,0.4,-2.5],col:0x00d4ff,rot:[0.004,0.006,0.002]},{geo:new THREE.TorusKnotGeometry(0.55,0.15,80,16),pos:[-2.4,-0.2,-3.2],col:0x8b5cf6,rot:[0.005,0.003,0.007]},{geo:new THREE.OctahedronGeometry(0.6,0),pos:[0.3,1.6,-4],col:0x3b82f6,rot:[0.003,0.008,0.004]},{geo:new THREE.TorusGeometry(0.7,0.06,16,48),pos:[-1.5,-1.1,-3],col:0x00d4ff,rot:[0.006,0.002,0.005]},{geo:new THREE.SphereGeometry(0.35,16,16),pos:[1.8,-0.9,-2.8],col:0xc9a96e,rot:[0.005,0.005,0.003]}].forEach(s=>{const m=new THREE.Mesh(s.geo,new THREE.MeshBasicMaterial({color:s.col,wireframe:true,transparent:true,opacity:0.55,depthWrite:false}));m.position.set(...s.pos);m.userData={rotSpeed:s.rot};threeScene.add(m);threeShapes.push(m)});
+                    const rg=new THREE.TorusGeometry(1.3,0.015,8,80),rm=new THREE.MeshBasicMaterial({color:0x00d4ff,wireframe:true,transparent:true,opacity:0.3,depthWrite:false}),ri=new THREE.Mesh(rg,rm);ri.position.set(0,-0.3,-2);ri.rotation.x=Math.PI/3;ri.userData={rotSpeed:[0.002,0.009,0.001]};threeScene.add(ri);threeShapes.push(ri);
+                }catch(e){threeScene=null}
             }
+            function animateThreeJS(){if(!threeScene)return;animationId=requestAnimationFrame(animateThreeJS);cMx+=(mTx-cMx)*0.05;cMy+=(mTy-cMy)*0.05;threeCamera.position.x+=(cMx*1.5-threeCamera.position.x)*0.03;threeCamera.position.y+=(-cMy*0.9-threeCamera.position.y)*0.03;threeCamera.lookAt(0,0,-1);threeShapes.forEach(s=>{if(s.userData?.rotSpeed){s.rotation.x+=s.userData.rotSpeed[0];s.rotation.y+=s.userData.rotSpeed[1];s.rotation.z+=s.userData.rotSpeed[2]}});if(threeParticles){threeParticles.rotation.y+=0.0003;threeParticles.rotation.x+=0.0002}threeRenderer.render(threeScene,threeCamera)}
+            function resizeThreeJS(){if(!threeScene)return;const r=document.getElementById('hero').getBoundingClientRect();threeCamera.aspect=r.width/Math.max(r.height,1);threeCamera.updateProjectionMatrix();threeRenderer.setSize(r.width,r.height)}
+            document.addEventListener('mousemove',e=>{mTx=(e.clientX/window.innerWidth)*2-1;mTy=(e.clientY/window.innerHeight)*2-1});initThreeJS();if(threeScene)animateThreeJS();window.addEventListener('resize',resizeThreeJS);
 
-            function animateThreeJS() {
-                if (!threeScene) return;
-                animationId = requestAnimationFrame(animateThreeJS);
-                currentMouseX += (mouseTargetX - currentMouseX) * 0.05;
-                currentMouseY += (mouseTargetY - currentMouseY) * 0.05;
-                threeCamera.position.x += (currentMouseX * 1.5 - threeCamera.position.x) * 0.03;
-                threeCamera.position.y += (-currentMouseY * 0.9 - threeCamera.position.y) * 0.03;
-                threeCamera.lookAt(0, 0, -1);
-                threeShapes.forEach(s => {
-                    if (s.userData && s.userData.rotSpeed) {
-                        s.rotation.x += s.userData.rotSpeed[0];
-                        s.rotation.y += s.userData.rotSpeed[1];
-                        s.rotation.z += s.userData.rotSpeed[2];
-                    }
-                });
-                if (threeParticles) {
-                    threeParticles.rotation.y += 0.0003;
-                    threeParticles.rotation.x += 0.0002;
-                }
-                threeRenderer.render(threeScene, threeCamera);
-            }
-
-            function resizeThreeJS() {
-                if (!threeScene) return;
-                const rect = document.getElementById('hero').getBoundingClientRect();
-                threeCamera.aspect = rect.width / Math.max(rect.height, 1);
-                threeCamera.updateProjectionMatrix();
-                threeRenderer.setSize(rect.width, rect.height);
-            }
-
-            document.addEventListener('mousemove', e => {
-                mouseTargetX = (e.clientX / window.innerWidth) * 2 - 1;
-                mouseTargetY = (e.clientY / window.innerHeight) * 2 - 1;
-            });
-            initThreeJS();
-            if (threeScene) animateThreeJS();
-            window.addEventListener('resize', resizeThreeJS);
-
-            // GSAP animations
             gsap.registerPlugin(ScrollTrigger);
-            const heroTitle = document.getElementById('heroTitle');
-            if (heroTitle) {
-                const text = heroTitle.textContent;
-                heroTitle.innerHTML = text.split('').map(char => `<span class="char">${char}</span>`).join('');
-                gsap.from('.hero-title .char', {
-                    opacity: 0, y: 40, rotateX: -90, stagger: 0.03, duration: 0.8, ease: 'back.out(1.7)', delay: 0.3
-                });
-            }
+            const ht=document.getElementById('heroTitle');if(ht){const t=ht.textContent;ht.innerHTML=t.split('').map(c=>`<span class="char">${c}</span>`).join('');gsap.from('.hero-title .char',{opacity:0,y:40,rotateX:-90,stagger:0.03,duration:0.8,ease:'back.out(1.7)',delay:0.3})}
+            ['#about .about-visual','#about .about-text','#services .service-card','#skills .skill-tag','#portfolio .portfolio-card','#why .why-card','#contact .contact-form','#contact .contact-info-card'].forEach(sel=>{const els=document.querySelectorAll(sel);if(!els.length)return;gsap.fromTo(els,{opacity:0,y:60,scale:0.95},{opacity:1,y:0,scale:1,duration:0.8,ease:'power3.out',stagger:els.length>1?0.08:0,scrollTrigger:{trigger:els[0],start:'top 85%',toggleActions:'play none none none'}})});
+            document.querySelectorAll('.why-card, .service-card, .portfolio-card').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,cx=r.width/2,cy=r.height/2,rx=(y-cy)/8,ry=(cx-x)/8;card.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(5px)`});card.addEventListener('mouseleave',()=>{card.style.transform='none'})});
 
-            const animated = [
-                '#about .about-visual', '#about .about-text', '#services .service-card', '#skills .skill-tag',
-                '#portfolio .portfolio-card', '#why .why-card', '#contact .contact-form', '#contact .contact-info-card'
-            ];
-            animated.forEach(sel => {
-                const els = document.querySelectorAll(sel);
-                if (!els.length) return;
-                gsap.fromTo(els, { opacity: 0, y: 60, scale: 0.95 }, {
-                    opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out',
-                    stagger: els.length > 1 ? 0.08 : 0,
-                    scrollTrigger: { trigger: els[0], start: 'top 85%', toggleActions: 'play none none none' }
-                });
-            });
+            const nav=document.getElementById('nav'),ham=document.getElementById('hamburger'),nl=document.getElementById('navLinks'),al=nl.querySelectorAll('a'),bt=document.getElementById('backToTop');
+            window.addEventListener('scroll',()=>{const y=window.scrollY;nav.classList.toggle('scrolled',y>60);bt.classList.toggle('visible',y>600);let cur='';document.querySelectorAll('section[id]').forEach(s=>{if(y>=s.offsetTop-120)cur=s.getAttribute('id')});al.forEach(a=>{a.classList.remove('active');if(a.getAttribute('href')==='#'+cur)a.classList.add('active')})});
+            ham.addEventListener('click',()=>{const ex=ham.getAttribute('aria-expanded')==='true';ham.setAttribute('aria-expanded',!ex);ham.classList.toggle('active');nl.classList.toggle('active')});
+            al.forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('active');nl.classList.remove('active');ham.setAttribute('aria-expanded','false')}));
+            bt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-            // Tilt effect on cards
-            const tiltCards = document.querySelectorAll('.why-card, .service-card, .portfolio-card');
-            tiltCards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = (y - centerY) / 8;
-                    const rotateY = (centerX - x) / 8;
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(5px)`;
-                });
-                card.addEventListener('mouseleave', () => { card.style.transform = 'none'; });
-            });
-
-            // Navigation
-            const nav = document.getElementById('nav');
-            const hamburger = document.getElementById('hamburger');
-            const navLinks = document.getElementById('navLinks');
-            const allNavLinks = navLinks.querySelectorAll('a');
-            const backToTop = document.getElementById('backToTop');
-
-            window.addEventListener('scroll', () => {
-                const y = window.scrollY;
-                nav.classList.toggle('scrolled', y > 60);
-                backToTop.classList.toggle('visible', y > 600);
-                let current = '';
-                document.querySelectorAll('section[id]').forEach(s => { if (y >= s.offsetTop - 120) current = s.getAttribute('id'); });
-                allNavLinks.forEach(a => { a.classList.remove('active'); if (a.getAttribute('href') === `#${current}`) a.classList.add('active'); });
-            });
-
-            hamburger.addEventListener('click', () => {
-                const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-                hamburger.setAttribute('aria-expanded', !expanded);
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
-
-            allNavLinks.forEach(a => a.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
-            }));
-
-            backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-            if (threeScene) {
-                const obs = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        if (!entry.isIntersecting && animationId) { cancelAnimationFrame(animationId); animationId = null; }
-                        else if (entry.isIntersecting && !animationId) animateThreeJS();
-                    });
-                }, { threshold: 0.1 });
-                obs.observe(document.getElementById('hero'));
-            }
+            if(threeScene){const o=new IntersectionObserver(e=>{e.forEach(en=>{if(!en.isIntersecting&&animationId){cancelAnimationFrame(animationId);animationId=null}else if(en.isIntersecting&&!animationId)animateThreeJS()})},{threshold:0.1});o.observe(document.getElementById('hero'))}
         })();
     </script>
 </body>
