@@ -17,7 +17,6 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
-        /* --- DESIGN SYSTEM & VARIABLES --- */
         :root {
             --bg-color: #030305;
             --surface-color: rgba(255, 255, 255, 0.03);
@@ -31,7 +30,6 @@
 
         * { box-sizing: border-box; }
         
-        /* Hides default cursor on desktop for custom cursor */
         @media (min-width: 769px) { 
             body, a, button, input, textarea { cursor: none !important; } 
         }
@@ -80,7 +78,7 @@
         }
         #webgl-canvas {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100svh;
-            z-index: 0; pointer-events: none; opacity: 0.4;
+            z-index: 0; pointer-events: none; opacity: 0.6;
         }
 
         /* --- LAYOUT ARCHITECTURE --- */
@@ -290,7 +288,7 @@
                     <a href="https://railpulse-six.vercel.app/" target="_blank" class="btn btn-outline interactive-hover" style="width: 100%; padding: 0.8rem;"><i class="ph ph-arrow-square-out"></i> View Live Site</a>
                 </div>
 
-                <!-- Project 3: Leak Hunter Pro (Cybersecurity Solution Added) -->
+                <!-- Project 3: Leak Hunter Pro -->
                 <div class="glass-card project-card gsap-reveal interactive-hover">
                     <div class="project-visual">
                         <i class="ph ph-shield-check" style="font-size: 4rem; color: var(--accent-cyan);"></i>
@@ -384,204 +382,213 @@
                     preText.innerText = terminalMessages[msgIndex];
                 } else {
                     clearInterval(bootSequence);
-                    preloader.style.opacity = '0';
-                    setTimeout(() => preloader.remove(), 800);
+                    if(preloader) {
+                        preloader.style.opacity = '0';
+                        setTimeout(() => preloader.remove(), 800);
+                    }
                 }
             }, 600);
 
             // --- 2. LENIS SMOOTH SCROLLING ---
-            const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-                smooth: true
-            });
-            function raf(time) {
-                lenis.raf(time);
+            try {
+                const lenis = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                    smooth: true
+                });
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
                 requestAnimationFrame(raf);
+            } catch(e) {
+                console.log("Lenis fallback active");
             }
-            requestAnimationFrame(raf);
 
             // --- 3. CUSTOM MAGNETIC CURSOR (Desktop Only) ---
             if (window.innerWidth > 768) {
                 const cursorDot = document.querySelector('.cursor-dot');
                 const cursorOutline = document.querySelector('.cursor-outline');
                 
-                window.addEventListener('mousemove', (e) => {
-                    const posX = e.clientX;
-                    const posY = e.clientY;
-                    
-                    cursorDot.style.left = `${posX}px`;
-                    cursorDot.style.top = `${posY}px`;
-                    
-                    cursorOutline.animate({
-                        left: `${posX}px`, top: `${posY}px`
-                    }, { duration: 500, fill: "forwards" });
-                });
+                if(cursorDot && cursorOutline) {
+                    window.addEventListener('mousemove', (e) => {
+                        const posX = e.clientX;
+                        const posY = e.clientY;
+                        
+                        cursorDot.style.left = `${posX}px`;
+                        cursorDot.style.top = `${posY}px`;
+                        
+                        cursorOutline.animate({
+                            left: `${posX}px`, top: `${posY}px`
+                        }, { duration: 500, fill: "forwards" });
+                    });
 
-                const interactives = document.querySelectorAll('a, button, .interactive-hover');
-                interactives.forEach(el => {
-                    el.addEventListener('mouseenter', () => {
-                        cursorOutline.style.width = '60px';
-                        cursorOutline.style.height = '60px';
-                        cursorOutline.style.backgroundColor = 'rgba(0, 240, 255, 0.1)';
-                        cursorOutline.style.borderColor = 'rgba(0, 240, 255, 1)';
+                    const interactives = document.querySelectorAll('a, button, .interactive-hover');
+                    interactives.forEach(el => {
+                        el.addEventListener('mouseenter', () => {
+                            cursorOutline.style.width = '60px';
+                            cursorOutline.style.height = '60px';
+                            cursorOutline.style.backgroundColor = 'rgba(0, 240, 255, 0.1)';
+                            cursorOutline.style.borderColor = 'rgba(0, 240, 255, 1)';
+                        });
+                        el.addEventListener('mouseleave', () => {
+                            cursorOutline.style.width = '40px';
+                            cursorOutline.style.height = '40px';
+                            cursorOutline.style.backgroundColor = 'transparent';
+                            cursorOutline.style.borderColor = 'rgba(0, 240, 255, 0.5)';
+                        });
                     });
-                    el.addEventListener('mouseleave', () => {
-                        cursorOutline.style.width = '40px';
-                        cursorOutline.style.height = '40px';
-                        cursorOutline.style.backgroundColor = 'transparent';
-                        cursorOutline.style.borderColor = 'rgba(0, 240, 255, 0.5)';
-                    });
-                });
+                }
             }
 
             // --- 4. UPGRADED THREE.JS PARTICLE ENGINE ---
             const canvas = document.querySelector('#webgl-canvas');
-            const scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x030305);
+            if(canvas) {
+                const scene = new THREE.Scene();
+                scene.background = new THREE.Color(0x030305);
 
-            const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-            camera.position.z = 18;
+                const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+                camera.position.z = 18;
 
-            // Mouse tracking variables for 3D Parallax
-            let mouseX = 0;
-            let mouseY = 0;
-            let targetX = 0;
-            let targetY = 0;
-            const windowHalfX = window.innerWidth / 2;
-            const windowHalfY = window.innerHeight / 2;
+                let mouseX = 0;
+                let mouseY = 0;
+                let targetX = 0;
+                let targetY = 0;
+                const windowHalfX = window.innerWidth / 2;
+                const windowHalfY = window.innerHeight / 2;
 
-            document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX - windowHalfX);
-                mouseY = (event.clientY - windowHalfY);
-            });
-
-            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-            const particleCount = 12000; 
-            const basePositions = new Float32Array(particleCount * 3);
-            const targetPositions = new Float32Array(particleCount * 3);
-            const randoms = new Float32Array(particleCount);
-
-            for (let i = 0; i < particleCount; i++) {
-                const phi = Math.acos(-1 + (2 * i) / particleCount);
-                const theta = Math.sqrt(particleCount * Math.PI) * phi;
-                const rSphere = 4.5;
-                basePositions[i * 3] = rSphere * Math.cos(theta) * Math.sin(phi);
-                basePositions[i * 3 + 1] = rSphere * Math.sin(theta) * Math.sin(phi);
-                basePositions[i * 3 + 2] = rSphere * Math.cos(phi);
-
-                const u = Math.random() * Math.PI * 2;
-                const v = Math.random() * Math.PI * 2;
-                const R = 6.5; const r = 1.8; 
-                targetPositions[i * 3] = (R + r * Math.cos(v)) * Math.cos(u);
-                targetPositions[i * 3 + 1] = (R + r * Math.cos(v)) * Math.sin(u);
-                targetPositions[i * 3 + 2] = r * Math.sin(v);
-
-                randoms[i] = Math.random(); 
-            }
-
-            const geometry = new THREE.BufferGeometry();
-            geometry.setAttribute('position', new THREE.BufferAttribute(basePositions, 3));
-            geometry.setAttribute('aTargetPosition', new THREE.BufferAttribute(targetPositions, 3));
-            geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
-
-            const vertexShader = `
-                uniform float uProgress;
-                uniform float uTime;
-                attribute vec3 aTargetPosition;
-                attribute float aRandom;
-                varying vec3 vPosition;
-                
-                void main() {
-                    vec3 currentPos = mix(position, aTargetPosition, uProgress);
-                    currentPos.y += sin(uTime + currentPos.x * 2.0) * 0.15;
-                    vPosition = currentPos; 
-                    
-                    vec4 modelViewPosition = modelViewMatrix * vec4(currentPos, 1.0);
-                    gl_Position = projectionMatrix * modelViewPosition;
-                    
-                    // Twinkle calculation
-                    float pulse = sin(uTime * (2.0 + aRandom * 5.0)) * 0.5 + 0.5;
-                    gl_PointSize = (1.5 + pulse * 2.0) * (1.0 / -modelViewPosition.z);
-                }
-            `;
-
-            const fragmentShader = `
-                varying vec3 vPosition;
-                uniform float uTime;
-                
-                void main() {
-                    float distanceToCenter = distance(gl_PointCoord, vec2(0.5));
-                    if(distanceToCenter > 0.5) discard;
-                    
-                    vec3 color1 = vec3(0.0, 0.94, 1.0);
-                    vec3 color2 = vec3(0.44, 0.0, 1.0);
-                    
-                    float mixFactor = sin(vPosition.x * 0.5 + uTime * 0.5) * 0.5 + 0.5;
-                    vec3 finalColor = mix(color1, color2, mixFactor);
-                    
-                    gl_FragColor = vec4(finalColor, 0.8);
-                }
-            `;
-
-            const material = new THREE.ShaderMaterial({
-                vertexShader, fragmentShader,
-                uniforms: { uProgress: { value: 0 }, uTime: { value: 0 } },
-                transparent: true, blending: THREE.AdditiveBlending, depthTest: false
-            });
-
-            const particleSystem = new THREE.Points(geometry, material);
-            scene.add(particleSystem);
-
-            const clock = new THREE.Clock();
-            
-            // --- 5. PERFORMANCE OPTIMIZATION & MOUSE PARALLAX ---
-            function animate3D() {
-                requestAnimationFrame(animate3D);
-                if (document.hidden) return; 
-                
-                const elapsedTime = clock.getElapsedTime();
-                material.uniforms.uTime.value = elapsedTime;
-                
-                // Ambient rotation
-                particleSystem.rotation.y = elapsedTime * 0.05;
-                particleSystem.rotation.x = elapsedTime * 0.02;
-
-                // Mouse Parallax Effect (Camera gently follows mouse)
-                targetX = mouseX * 0.001;
-                targetY = mouseY * 0.001;
-                camera.position.x += (targetX - camera.position.x) * 0.05;
-                camera.position.y += (-targetY - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
-
-                renderer.render(scene, camera);
-            }
-            animate3D();
-            
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-
-            // --- 6. GSAP SCROLL ANIMATIONS ---
-            gsap.registerPlugin(ScrollTrigger);
-            
-            gsap.to(material.uniforms.uProgress, {
-                value: 1, ease: "none",
-                scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 1 }
-            });
-
-            const revealElements = document.querySelectorAll(".gsap-reveal");
-            revealElements.forEach((el) => {
-                gsap.to(el, {
-                    scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" },
-                    opacity: 1, y: 0, duration: 0.8, ease: "power3.out"
+                document.addEventListener('mousemove', (event) => {
+                    mouseX = (event.clientX - windowHalfX);
+                    mouseY = (event.clientY - windowHalfY);
                 });
-            });
+
+                const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+                const particleCount = 10000; // Optimized for smooth mobile & PC rendering
+                const basePositions = new Float32Array(particleCount * 3);
+                const targetPositions = new Float32Array(particleCount * 3);
+                const randoms = new Float32Array(particleCount);
+
+                for (let i = 0; i < particleCount; i++) {
+                    const phi = Math.acos(-1 + (2 * i) / particleCount);
+                    const theta = Math.sqrt(particleCount * Math.PI) * phi;
+                    const rSphere = 4.5;
+                    basePositions[i * 3] = rSphere * Math.cos(theta) * Math.sin(phi);
+                    basePositions[i * 3 + 1] = rSphere * Math.sin(theta) * Math.sin(phi);
+                    basePositions[i * 3 + 2] = rSphere * Math.cos(phi);
+
+                    const u = Math.random() * Math.PI * 2;
+                    const v = Math.random() * Math.PI * 2;
+                    const R = 6.5; const r = 1.8; 
+                    targetPositions[i * 3] = (R + r * Math.cos(v)) * Math.cos(u);
+                    targetPositions[i * 3 + 1] = (R + r * Math.cos(v)) * Math.sin(u);
+                    targetPositions[i * 3 + 2] = r * Math.sin(v);
+
+                    randoms[i] = Math.random(); 
+                }
+
+                const geometry = new THREE.BufferGeometry();
+                geometry.setAttribute('position', new THREE.BufferAttribute(basePositions, 3));
+                geometry.setAttribute('aTargetPosition', new THREE.BufferAttribute(targetPositions, 3));
+                geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
+
+                const vertexShader = `
+                    precision mediump float;
+                    uniform float uProgress;
+                    uniform float uTime;
+                    attribute vec3 aTargetPosition;
+                    attribute float aRandom;
+                    varying vec3 vPosition;
+                    
+                    void main() {
+                        vec3 currentPos = mix(position, aTargetPosition, uProgress);
+                        currentPos.y += sin(uTime + currentPos.x * 2.0) * 0.15;
+                        vPosition = currentPos; 
+                        
+                        vec4 modelViewPosition = modelViewMatrix * vec4(currentPos, 1.0);
+                        gl_Position = projectionMatrix * modelViewPosition;
+                        
+                        float pulse = sin(uTime * (2.0 + aRandom * 5.0)) * 0.5 + 0.5;
+                        gl_PointSize = (1.5 + pulse * 2.0) * (1.0 / -modelViewPosition.z);
+                    }
+                `;
+
+                const fragmentShader = `
+                    precision mediump float;
+                    varying vec3 vPosition;
+                    uniform float uTime;
+                    
+                    void main() {
+                        float distanceToCenter = distance(gl_PointCoord, vec2(0.5));
+                        if(distanceToCenter > 0.5) discard;
+                        
+                        vec3 color1 = vec3(0.0, 0.94, 1.0);
+                        vec3 color2 = vec3(0.44, 0.0, 1.0);
+                        
+                        float mixFactor = sin(vPosition.x * 0.5 + uTime * 0.5) * 0.5 + 0.5;
+                        vec3 finalColor = mix(color1, color2, mixFactor);
+                        
+                        gl_FragColor = vec4(finalColor, 0.8);
+                    }
+                `;
+
+                const material = new THREE.ShaderMaterial({
+                    vertexShader, fragmentShader,
+                    uniforms: { uProgress: { value: 0 }, uTime: { value: 0 } },
+                    transparent: true, blending: THREE.AdditiveBlending, depthTest: false
+                });
+
+                const particleSystem = new THREE.Points(geometry, material);
+                scene.add(particleSystem);
+
+                const clock = new THREE.Clock();
+                
+                function animate3D() {
+                    requestAnimationFrame(animate3D);
+                    if (document.hidden) return; 
+                    
+                    const elapsedTime = clock.getElapsedTime();
+                    material.uniforms.uTime.value = elapsedTime;
+                    
+                    particleSystem.rotation.y = elapsedTime * 0.05;
+                    particleSystem.rotation.x = elapsedTime * 0.02;
+
+                    targetX = mouseX * 0.001;
+                    targetY = mouseY * 0.001;
+                    camera.position.x += (targetX - camera.position.x) * 0.05;
+                    camera.position.y += (-targetY - camera.position.y) * 0.05;
+                    camera.lookAt(scene.position);
+
+                    renderer.render(scene, camera);
+                }
+                animate3D();
+                
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+
+            // --- 5. GSAP SCROLL ANIMATIONS ---
+            if(typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                
+                gsap.to(material.uniforms.uProgress, {
+                    value: 1, ease: "none",
+                    scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 1 }
+                });
+
+                const revealElements = document.querySelectorAll(".gsap-reveal");
+                revealElements.forEach((el) => {
+                    gsap.to(el, {
+                        scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" },
+                        opacity: 1, y: 0, duration: 0.8, ease: "power3.out"
+                    });
+                });
+            }
         });
     </script>
 </body>
