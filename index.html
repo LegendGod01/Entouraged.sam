@@ -1188,7 +1188,9 @@
             <div class="about-grid">
                 <div class="about-visual">
                     <div class="about-visual-glow"></div>
-                    <img src="pic16428.png" alt="Amit Kumar Mishra" class="about-image">
+                    <!-- FIXED image filename: 16428.png -->
+                    <img src="16428.png" alt="Amit Kumar Mishra" class="about-image" onerror="this.style.display='none'; this.parentNode.querySelector('.fallback-text').style.display='flex';">
+                    <div class="fallback-text" style="display:none; position:absolute; z-index:2; font-size:3rem; font-weight:900; color:rgba(255,255,255,0.1);">AM</div>
                 </div>
                 <div class="about-text">
                     <span class="section-label">01 / About</span>
