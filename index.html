@@ -180,6 +180,54 @@
         .btn-secondary { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,0.25); }
         .btn-secondary:hover { border-color:#fff; background:rgba(255,255,255,0.05); transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,212,255,0.2); }
 
+        /* ENHANCED GITHUB BUTTON */
+        .btn-github {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid var(--accent-cyan);
+            background: rgba(0, 212, 255, 0.05);
+            color: #fff;
+            transition: all 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-github:hover {
+            border-color: #fff;
+            background: rgba(0, 212, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 212, 255, 0.4);
+        }
+        .btn-github svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+        .btn-github:hover svg:first-of-type {
+            transform: scale(1.2) rotate(-10deg);
+        }
+        .btn-github .arrow-icon {
+            margin-left: auto;
+            width: 18px;
+            height: 18px;
+            stroke: var(--accent-cyan);
+            fill: none;
+            stroke-width: 2;
+            transition: transform 0.3s ease;
+        }
+        .btn-github:hover .arrow-icon {
+            transform: translateX(4px);
+        }
+
         section { padding:var(--section-padding); position:relative; z-index:1; }
         .section-container { max-width:1200px; margin:0 auto; padding:0 24px; }
         .section-label { font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.08em; color:var(--accent-cyan); text-transform:uppercase; margin-bottom:12px; font-weight:500; }
@@ -422,9 +470,10 @@
                 <div class="portfolio-card"><div class="portfolio-card-image"><div class="cube-container"><div class="cube-face front"></div><div class="cube-face back"></div><div class="cube-face right"></div><div class="cube-face left"></div><div class="cube-face top"></div><div class="cube-face bottom"></div></div></div><div class="portfolio-card-body"><h3>Leak Hunter Pro</h3><p>Advanced cybersecurity tool for detecting data leaks, vulnerabilities, and exposure across digital assets.</p><div class="portfolio-links"><a href="https://leak-hunter-pro.vercel.app/" target="_blank" rel="noopener" class="portfolio-link"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a><a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="portfolio-link"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a></div></div></div>
             </div>
             <div class="text-center mt-48">
-                <a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="btn btn-secondary">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right:8px;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                <a href="https://github.com/LegendGod01" target="_blank" rel="noopener" class="btn btn-github">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                     Explore All Projects on GitHub
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
             </div>
         </div>
@@ -447,7 +496,7 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION (with fixed EmailJS) -->
+    <!-- CONTACT SECTION -->
     <section id="contact" style="background: var(--bg-secondary);">
         <div class="section-container">
             <span class="section-label">06 / Contact</span>
