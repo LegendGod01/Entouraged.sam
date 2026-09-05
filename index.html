@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Amit Kumar Mishra // Cyber Security & Systems</title>
   
   <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/b1314443e183d1cdd77049077c46facc?family=Orbitron-Medium" type="text/css">
@@ -16,8 +16,8 @@
       --muted: rgba(251, 219, 175, 0.72);
       --label: rgba(251, 219, 175, 0.48);
       --orange: #E07020;
-      --card: rgba(10, 8, 7, 0.65);
-      --card-border: rgba(251, 219, 175, 0.12);
+      --card: rgba(10, 8, 7, 0.68);
+      --card-border: rgba(251, 219, 175, 0.14);
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
 
@@ -25,11 +25,12 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html, body {
       width: 100%;
-      height: 100%;
+      min-height: 100%;
       background: #C45A18;
       color: var(--cream);
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -44,37 +45,42 @@
       letter-spacing: 0.02em;
     }
 
-    /* Background Viewport HUD Grid */
+    /* Base Hero Section Container */
     .hero {
       position: relative;
       width: 100%;
-      height: 100vh;
-      height: 100dvh;
-      overflow: hidden;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      overflow-y: auto;
       background: #C45A18;
+      display: flex;
+      flex-direction: column;
     }
 
     .hero::after {
       content: '';
-      position: absolute;
+      position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 5;
       background-image: 
-        linear-gradient(rgba(251, 219, 175, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(251, 219, 175, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+        linear-gradient(rgba(251, 219, 175, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(251, 219, 175, 0.025) 1px, transparent 1px);
+      background-size: 36px 36px;
     }
 
-    /* Dual-Layer Images */
+    /* Fixed Dual-Layer Imagery */
     .hero-base-img,
     .hero-reveal-img {
-      position: absolute;
+      position: fixed;
       inset: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
       background-size: cover;
       background-position: center center;
+      pointer-events: none;
     }
 
     .hero-base-img {
@@ -83,7 +89,6 @@
 
     .hero-reveal-img {
       z-index: 2;
-      pointer-events: none;
       -webkit-mask-image: radial-gradient(circle 0px at -999px -999px, #fff, transparent);
       mask-image: radial-gradient(circle 0px at -999px -999px, #fff, transparent);
       -webkit-mask-repeat: no-repeat;
@@ -93,34 +98,96 @@
 
     /* HUD Corner Brackets */
     .corner-bracket {
-      position: absolute;
-      width: 16px;
-      height: 16px;
+      position: fixed;
+      width: 14px;
+      height: 14px;
       z-index: 9;
       pointer-events: none;
       border-color: rgba(251, 219, 175, 0.35);
       border-style: solid;
     }
-    .corner-tl { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
-    .corner-tr { top: 16px; right: 16px; border-width: 2px 2px 0 0; }
-    .corner-bl { bottom: 16px; left: 16px; border-width: 0 0 2px 2px; }
-    .corner-br { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
+    .corner-tl { top: max(12px, env(safe-area-inset-top)); left: max(12px, env(safe-area-inset-left)); border-width: 2px 0 0 2px; }
+    .corner-tr { top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); border-width: 2px 2px 0 0; }
+    .corner-bl { bottom: max(12px, env(safe-area-inset-bottom)); left: max(12px, env(safe-area-inset-left)); border-width: 0 0 2px 2px; }
+    .corner-br { bottom: max(12px, env(safe-area-inset-bottom)); right: max(12px, env(safe-area-inset-right)); border-width: 0 2px 2px 0; }
 
-    /* Interactive UI Grid */
+    /* Desktop Primary Grid Layout */
     .hero-ui {
-      position: absolute;
-      inset: 0;
+      position: relative;
       z-index: 8;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.15fr 0.85fr;
       grid-template-rows: auto 1fr auto;
-      padding: 36px 44px 40px;
+      padding: clamp(24px, 4vw, 44px);
       pointer-events: none;
     }
 
+    /* Top Telemetry Bar */
+    .hero-top-bar {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      pointer-events: auto;
+    }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: rgba(251, 219, 175, 0.85);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cream);
+      box-shadow: 0 0 8px var(--cream);
+    }
+
+    .telemetry-badge {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em;
+      color: rgba(251, 219, 175, 0.85);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(10, 8, 7, 0.55);
+      padding: 6px 14px;
+      border-radius: 50px;
+      border: 1px solid rgba(251, 219, 175, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .status-pulse {
+      width: 6px;
+      height: 6px;
+      background: #00f2fe;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #00f2fe;
+      animation: blinkPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes blinkPulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Hero Left Area */
     .hero-left {
       grid-column: 1;
-      grid-row: 1 / -1;
+      grid-row: 2;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -131,12 +198,11 @@
 
     .hero-copy {
       max-width: 540px;
-      padding-right: 48px;
       pointer-events: auto;
     }
 
     .hero-copy h1 {
-      font-size: clamp(1.55rem, 3.6vw, 3.15rem);
+      font-size: clamp(1.65rem, 4vw, 3.15rem);
       line-height: 1.05;
       text-transform: uppercase;
       color: var(--cream);
@@ -148,28 +214,29 @@
     }
 
     .hero-copy p {
-      margin-top: 18px;
-      max-width: 360px;
+      margin-top: 14px;
+      max-width: 380px;
       font-size: 13.5px;
       font-weight: 400;
       line-height: 1.55;
       color: var(--muted);
     }
 
-    /* Social Icons Row */
+    /* Social Action Icons */
     .icon-row {
       display: flex;
       gap: 12px;
-      margin-top: 22px;
+      margin-top: 20px;
     }
 
     .icon-btn {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       border: 1px solid rgba(251, 219, 175, 0.55);
-      background: rgba(10, 8, 7, 0.3);
+      background: rgba(10, 8, 7, 0.45);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       color: var(--cream);
       display: grid;
       place-items: center;
@@ -191,22 +258,23 @@
       fill: currentColor;
     }
 
-    /* Interactive Product HUD Card */
+    /* Reactive HUD Project Card */
     .product-card {
       pointer-events: auto;
-      width: min(340px, 100%);
+      width: min(350px, 100%);
       display: grid;
-      grid-template-columns: 86px 1fr;
+      grid-template-columns: 84px 1fr;
       grid-template-rows: auto auto;
       gap: 10px 14px;
-      padding: 14px;
+      padding: 13px;
       border-radius: 18px;
       background: var(--card);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border: 1px solid var(--card-border);
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
       transition: border-color 0.3s ease, transform 0.3s ease;
+      margin-top: 8px;
     }
 
     .product-card:hover {
@@ -217,8 +285,8 @@
     .product-thumb {
       grid-column: 1;
       grid-row: 1 / -1;
-      width: 86px;
-      min-height: 86px;
+      width: 84px;
+      min-height: 84px;
       border-radius: 12px;
       overflow: hidden;
       background-size: cover;
@@ -237,7 +305,7 @@
     .product-body {
       grid-column: 2;
       grid-row: 1;
-      transition: opacity 0.25s ease;
+      transition: opacity 0.2s ease;
     }
 
     .product-body h2 {
@@ -249,7 +317,7 @@
     }
 
     .product-body p {
-      margin-top: 5px;
+      margin-top: 4px;
       font-size: 11.5px;
       line-height: 1.45;
       color: var(--muted);
@@ -281,45 +349,12 @@
       transform: translateY(-1px);
     }
 
-    /* Top-Right Real-Time Telemetry Bar */
-    .hero-page {
-      position: absolute;
-      top: 36px;
-      right: 44px;
-      font-size: 12px;
-      font-family: var(--font-mono);
-      letter-spacing: 0.08em;
-      color: rgba(251, 219, 175, 0.85);
-      pointer-events: auto;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(10, 8, 7, 0.4);
-      padding: 6px 14px;
-      border-radius: 50px;
-      border: 1px solid rgba(251, 219, 175, 0.15);
-      backdrop-filter: blur(10px);
-    }
-
-    .status-pulse {
-      width: 7px;
-      height: 7px;
-      background: #00f2fe;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #00f2fe;
-      animation: blinkPulse 2s infinite ease-in-out;
-    }
-
-    @keyframes blinkPulse {
-      0%, 100% { opacity: 0.4; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.2); }
-    }
-
-    /* Operative Deployments List */
+    /* Operative Deployments Console */
     .specs {
       grid-column: 2;
-      grid-row: 3;
+      grid-row: 2;
       justify-self: end;
+      align-self: end;
       pointer-events: auto;
       width: min(340px, 100%);
     }
@@ -327,32 +362,45 @@
     .specs h3 {
       font-size: 11px;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       letter-spacing: 0.12em;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
+    }
+
+    .specs-tag {
+      font-size: 9px;
+      color: var(--label);
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+
+    .spec-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .spec-row {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      gap: 16px;
-      padding: 8px 10px;
-      margin: 0 -10px;
-      border-radius: 8px;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: background 0.2s ease, transform 0.2s ease;
+      background: rgba(10, 8, 7, 0.4);
+      border: 1px solid rgba(251, 219, 175, 0.06);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     }
 
     .spec-row:hover, .spec-row.active {
-      background: rgba(251, 219, 175, 0.08);
+      background: rgba(251, 219, 175, 0.12);
+      border-color: rgba(251, 219, 175, 0.35);
       transform: translateX(-3px);
-    }
-
-    .spec-row + .spec-row {
-      border-top: 1px solid rgba(251, 219, 175, 0.1);
     }
 
     .spec-label {
@@ -363,6 +411,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
     }
 
     .spec-row.active .spec-label {
@@ -373,37 +422,41 @@
     .spec-row.active .spec-label::before {
       content: '▸';
       color: #00f2fe;
-      font-size: 12px;
+      font-size: 13px;
     }
 
     .spec-value {
-      font-size: 12.5px;
+      font-size: 12px;
       color: var(--cream);
       text-align: right;
       white-space: nowrap;
       font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* HUD Feedback Toast */
     .hud-toast {
       position: fixed;
-      top: 24px;
+      top: max(20px, env(safe-area-inset-top));
       left: 50%;
       transform: translateX(-50%) translateY(-100px);
-      background: rgba(10, 8, 7, 0.9);
+      background: rgba(10, 8, 7, 0.95);
       border: 1px solid var(--cream);
-      box-shadow: 0 0 20px rgba(251, 219, 175, 0.25);
+      box-shadow: 0 0 24px rgba(251, 219, 175, 0.3);
       color: var(--cream);
       font-family: var(--font-mono);
       font-size: 11px;
-      letter-spacing: 0.1em;
-      padding: 8px 20px;
+      letter-spacing: 0.08em;
+      padding: 9px 18px;
       border-radius: 50px;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       z-index: 9999;
       pointer-events: none;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
       opacity: 0;
+      white-space: nowrap;
     }
 
     .hud-toast.active {
@@ -413,7 +466,7 @@
 
     /* Keyframe Animations */
     @keyframes heroImageIn {
-      from { opacity: 0; transform: scale(1.18); }
+      from { opacity: 0; transform: scale(1.15); }
       to { opacity: 1; transform: scale(1); }
     }
 
@@ -424,14 +477,14 @@
     }
 
     @keyframes wordPullUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(18px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .pull-word {
       display: inline-block;
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(18px);
     }
 
     .pull-word:not(:last-child) {
@@ -443,14 +496,14 @@
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); filter: blur(8px); }
+      from { opacity: 0; transform: translateY(14px); filter: blur(6px); }
       to { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
 
     .fade-up-reveal {
       opacity: 0;
       transform: translateY(14px);
-      filter: blur(8px);
+      filter: blur(6px);
     }
 
     .fade-up-reveal.is-visible {
@@ -470,70 +523,143 @@
       }
     }
 
-    /* Responsive Breakpoints */
-    @media (max-width: 1024px) {
-      .hero-ui { padding: 32px 28px 36px; }
-      .hero-page { top: 32px; right: 28px; }
-      .specs { width: min(300px, 100%); }
-    }
-
+    /* ========================================================= */
+    /* RESPONSIVE OPTIMIZATIONS (TABLETS & PHONES)               */
+    /* ========================================================= */
     @media (max-width: 900px) {
-      .hero-ui { padding: 28px 22px 28px; }
-      .hero-page { top: 28px; right: 22px; }
-      .hero-copy h1 { font-size: clamp(1.35rem, 7.2vw, 2.4rem); }
-      .hero-base-img, .hero-reveal-img { background-position: 40% center; }
-      .specs { width: min(280px, 100%); }
-    }
-
-    @media (max-width: 768px) {
+      .hero-base-img, .hero-reveal-img {
+        background-position: 45% center;
+      }
       .hero-ui {
         grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr auto;
-        padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+        grid-template-rows: auto auto auto;
+        gap: 28px;
+        padding: max(20px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
       }
-      .hero-left { grid-column: 1; grid-row: 1 / 3; gap: 24px; }
-      .hero-page { top: max(20px, env(safe-area-inset-top)); right: max(20px, env(safe-area-inset-right)); }
-      .specs { grid-column: 1; grid-row: 3; justify-self: stretch; width: 100%; margin-top: 8px; }
-      .hero-base-img, .hero-reveal-img { background-position: 40% center; }
+      .hero-left {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 22px;
+      }
+      .specs {
+        grid-column: 1;
+        grid-row: 3;
+        justify-self: stretch;
+        width: 100%;
+        margin-top: 10px;
+      }
     }
 
-    @media (max-width: 720px) {
-      .hero { height: auto; min-height: 100vh; min-height: 100dvh; }
+    /* Small Phone Viewports (< 540px) */
+    @media (max-width: 540px) {
+      .hero-base-img, .hero-reveal-img {
+        background-position: 40% center;
+      }
       .hero-ui {
-        position: relative; display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh;
-        justify-content: flex-start; gap: 28px;
-        padding: max(22px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+        gap: 20px;
+        padding: max(16px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
       }
-      .hero-left { grid-column: auto; grid-row: auto; width: 100%; justify-content: flex-start; }
-      .hero-copy { max-width: 100%; padding-right: 0; }
-      .hero-copy p { font-size: 12.5px; max-width: 100%; }
-      .product-card { width: 100%; }
-      .specs { width: 100%; margin-top: auto; padding-top: 4px; }
-      .spec-value { white-space: normal; }
-      .hero-base-img, .hero-reveal-img { position: absolute; background-position: 40% center; }
+
+      /* Clean High-Tech Top Bar */
+      .hero-top-bar {
+        margin-bottom: 8px;
+      }
+      .brand-tag {
+        font-size: 10px;
+        letter-spacing: 0.1em;
+      }
+      .telemetry-badge {
+        font-size: 10px;
+        padding: 5px 10px;
+        letter-spacing: 0.05em;
+      }
+
+      /* Hero Copy Sizing for Mobile Screens */
+      .hero-copy h1 {
+        font-size: clamp(1.35rem, 7.8vw, 1.85rem);
+        line-height: 1.1;
+      }
+      .hero-copy p {
+        font-size: 12px;
+        margin-top: 10px;
+        line-height: 1.5;
+        max-width: 100%;
+      }
+
+      /* Compact Horizontal Action Row */
+      .icon-row {
+        margin-top: 14px;
+        gap: 10px;
+      }
+      .icon-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      /* Ergonomic Mobile HUD Card */
+      .product-card {
+        width: 100%;
+        grid-template-columns: 70px 1fr;
+        gap: 8px 12px;
+        padding: 10px;
+        border-radius: 14px;
+      }
+      .product-thumb {
+        width: 70px;
+        min-height: 70px;
+        border-radius: 10px;
+      }
+      .product-body h2 {
+        font-size: 10px;
+      }
+      .product-body p {
+        font-size: 11px;
+        line-height: 1.35;
+      }
+      .cart-btn {
+        padding: 5px 12px;
+        font-size: 11px;
+      }
+
+      /* Tap-Friendly Deployments */
+      .specs {
+        margin-top: 4px;
+      }
+      .specs h3 {
+        font-size: 10px;
+        margin-bottom: 8px;
+      }
+      .spec-row {
+        padding: 8px 10px;
+        border-radius: 8px;
+      }
+      .spec-row:hover, .spec-row.active {
+        transform: none;
+      }
+      .spec-label {
+        font-size: 10.5px;
+      }
+      .spec-value {
+        font-size: 11.5px;
+        max-width: 160px;
+      }
     }
 
-    @media (max-width: 480px) {
-      .hero-ui { gap: 22px; padding: max(18px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
-      .hero-copy h1 { font-size: clamp(1.1rem, 8.5vw, 1.65rem); }
-      .hero-copy p { font-size: 12px; margin-top: 14px; }
-      .icon-row { margin-top: 16px; gap: 8px; }
-      .icon-btn { width: 34px; height: 34px; }
-      .hero-left { gap: 22px; }
-      .product-card { grid-template-columns: 72px 1fr; gap: 8px 12px; padding: 10px; border-radius: 14px; }
-      .product-thumb { width: 72px; min-height: 72px; border-radius: 10px; }
-      .product-body h2 { font-size: 10px; }
-      .product-body p { font-size: 11px; }
-      .cart-btn { padding: 6px 14px; font-size: 11px; }
-      .specs h3 { font-size: 10px; margin-bottom: 10px; }
-      .spec-row { padding: 6px 4px; gap: 10px; margin: 0; }
-      .spec-label, .spec-value { font-size: 11px; }
-    }
-
-    @media (max-width: 360px) {
-      .hero-copy h1 { font-size: 1rem; }
-      .product-card { grid-template-columns: 64px 1fr; }
-      .product-thumb { width: 64px; min-height: 64px; }
+    /* Micro Phone Viewports (e.g., iPhone SE / 360px screens) */
+    @media (max-width: 375px) {
+      .hero-copy h1 {
+        font-size: 1.25rem;
+      }
+      .product-card {
+        grid-template-columns: 60px 1fr;
+      }
+      .product-thumb {
+        width: 60px;
+        min-height: 60px;
+      }
+      .telemetry-badge span#clock-display {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -549,8 +675,22 @@
     <div class="hero-base-img hero-image-animate" style="background-image: url('https://images.higgs.ai/?default=1&amp;output=webp&amp;url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260831_115955_2a9adb39-5e9b-4ced-96e2-6900eabe3de9.png&amp;w=1920&amp;q=85');"></div>
     <div class="hero-reveal-img" id="reveal-img" style="background-image: url('https://images.higgs.ai/?default=1&amp;output=webp&amp;url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260831_123709_183f0065-efb2-4bb2-a849-13aaa5af2f3f.png&amp;w=1920&amp;q=85');"></div>
 
-    <!-- Interactive UI -->
+    <!-- Interactive Interface Overlay -->
     <div class="hero-ui">
+      <!-- Top Mobile & Desktop Bar -->
+      <header class="hero-top-bar fade-up-reveal" data-delay="0.2">
+        <div class="brand-tag">
+          <span class="brand-tag-dot"></span>
+          <span>AMIT MISHRA [01]</span>
+        </div>
+        <div class="telemetry-badge">
+          <span class="status-pulse"></span>
+          <span>SYS.KERNEL</span>
+          <span id="clock-display">// 00:00:00 UTC</span>
+        </div>
+      </header>
+
+      <!-- Main Copy & Social Links -->
       <div class="hero-left">
         <div class="hero-copy">
           <h1 class="words-pull-up">
@@ -559,14 +699,14 @@
             <span>FULL STACK OPS</span>
           </h1>
           <p class="fade-up-reveal" data-delay="0.5">
-            Architecting autonomous AI platform agents, high-load web telemetry, and fortified zero-trust architectures for systems that don't just endure—they dominate.
+            Architecting autonomous AI platform agents, high-load telemetry, and fortified zero-trust architectures for next-generation digital systems.
           </p>
           <div class="icon-row fade-up-reveal" data-delay="0.65">
-            <!-- GitHub Profile Link -->
+            <!-- GitHub Profile -->
             <a href="https://github.com/LegendGod01" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub Profile" title="GitHub: LegendGod01">
               <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             </a>
-            <!-- Instagram Link -->
+            <!-- Instagram -->
             <a href="https://www.instagram.com/entouraged.sam" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="Instagram Profile" title="Instagram: @entouraged.sam">
               <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             </a>
@@ -590,40 +730,36 @@
         </article>
       </div>
 
-      <!-- Real-Time Telemetry & Clock -->
-      <div class="hero-page fade-up-reveal" data-delay="0.75">
-        <span class="status-pulse"></span>
-        <span id="live-telemetry">SYS.KERNEL // 00:00:00 UTC</span>
-      </div>
-
-      <!-- Interactive Operative Deployments Console -->
+      <!-- Interactive Deployments Console -->
       <div class="specs">
         <h3 class="words-pull-up">
           <span>Operative Deployments</span>
-          <span style="font-size: 9px; color: var(--label); font-family: var(--font-mono);">[SELECT ITEM]</span>
+          <span class="specs-tag">[TAP TO INSPECT]</span>
         </h3>
-        <div class="spec-row active fade-up-reveal" data-delay="1.2" data-index="0">
-          <span class="spec-label">Intelligence</span>
-          <span class="spec-value">SAM AI Platform</span>
-        </div>
-        <div class="spec-row fade-up-reveal" data-delay="1.3" data-index="1">
-          <span class="spec-label">Transit Telemetry</span>
-          <span class="spec-value">RailPulse Analytics</span>
-        </div>
-        <div class="spec-row fade-up-reveal" data-delay="1.4" data-index="2">
-          <span class="spec-label">Threat Detection</span>
-          <span class="spec-value">Leak Hunter Pro</span>
-        </div>
-        <div class="spec-row fade-up-reveal" data-delay="1.5" data-index="3">
-          <span class="spec-label">Defense Core</span>
-          <span class="spec-value">Zero-Trust Linux</span>
+        <div class="spec-list">
+          <div class="spec-row active fade-up-reveal" data-delay="1.2" data-index="0">
+            <span class="spec-label">Intelligence</span>
+            <span class="spec-value">SAM AI Platform</span>
+          </div>
+          <div class="spec-row fade-up-reveal" data-delay="1.3" data-index="1">
+            <span class="spec-label">Transit Telemetry</span>
+            <span class="spec-value">RailPulse Analytics</span>
+          </div>
+          <div class="spec-row fade-up-reveal" data-delay="1.4" data-index="2">
+            <span class="spec-label">Threat Detection</span>
+            <span class="spec-value">Leak Hunter Pro</span>
+          </div>
+          <div class="spec-row fade-up-reveal" data-delay="1.5" data-index="3">
+            <span class="spec-label">Defense Core</span>
+            <span class="spec-value">Zero-Trust Linux</span>
+          </div>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- HUD Toast -->
-  <div class="hud-toast" id="hud-toast">[ CLIPBOARD: Sam.redefine@gmail.com COPIED ]</div>
+  <!-- HUD Feedback Toast -->
+  <div class="hud-toast" id="hud-toast">[ COPIED: Sam.redefine@gmail.com ]</div>
 
   <script>
     (function () {
@@ -631,7 +767,7 @@
       var projects = [
         {
           title: "SYSTEM: SAM AI V2",
-          desc: "Autonomous AI agent platform with custom context parameters, local LLM execution & cloud persistence.",
+          desc: "Autonomous AI platform agent with customized context parameters, local LLM execution & cloud persistence.",
           url: "https://sam-ai-v2-psi.vercel.app/"
         },
         {
@@ -646,7 +782,7 @@
         },
         {
           title: "CORE: ZERO-TRUST MESH",
-          desc: "Hardened Oracle Ampere cloud container daemon running automated background systemd services.",
+          desc: "Hardened cloud container daemon with background systemd services and cryptographic access control.",
           url: "https://github.com/LegendGod01"
         }
       ];
@@ -661,13 +797,15 @@
         specRows.forEach(function(r) { r.classList.remove('active'); });
         if (specRows[index]) specRows[index].classList.add('active');
 
-        cardBody.style.opacity = '0.3';
-        setTimeout(function() {
-          cardTitle.textContent = projects[index].title;
-          cardDesc.textContent = projects[index].desc;
-          cardBtn.href = projects[index].url;
-          cardBody.style.opacity = '1';
-        }, 120);
+        if (cardBody) {
+          cardBody.style.opacity = '0.2';
+          setTimeout(function() {
+            cardTitle.textContent = projects[index].title;
+            cardDesc.textContent = projects[index].desc;
+            cardBtn.href = projects[index].url;
+            cardBody.style.opacity = '1';
+          }, 110);
+        }
       }
 
       specRows.forEach(function(row) {
@@ -682,20 +820,20 @@
       });
 
       // 2. REAL-TIME DIGITAL UTC CLOCK
-      var telemetryEl = document.getElementById('live-telemetry');
+      var clockEl = document.getElementById('clock-display');
       function updateClock() {
         var now = new Date();
         var hrs = String(now.getUTCHours()).padStart(2, '0');
         var mins = String(now.getUTCMinutes()).padStart(2, '0');
         var secs = String(now.getUTCSeconds()).padStart(2, '0');
-        if (telemetryEl) {
-          telemetryEl.textContent = 'SYS.KERNEL // ' + hrs + ':' + mins + ':' + secs + ' UTC';
+        if (clockEl) {
+          clockEl.textContent = '// ' + hrs + ':' + mins + ':' + secs + ' UTC';
         }
       }
       setInterval(updateClock, 1000);
       updateClock();
 
-      // 3. COPY EMAIL WITH TOAST
+      // 3. COPY EMAIL TO CLIPBOARD WITH HUD TOAST
       var copyBtn = document.getElementById('email-copy-btn');
       var toast = document.getElementById('hud-toast');
       if (copyBtn && toast) {
@@ -709,7 +847,7 @@
         });
       }
 
-      // 4. PHYSICS-BASED LERP SPOTLIGHT WITH IDLE AUTO-FLOAT
+      // 4. PHYSICS-BASED LERP SPOTLIGHT WITH TOUCH INTERACTION & IDLE AUTO-FLOAT
       var revealImg = document.getElementById('reveal-img');
       var curX = window.innerWidth / 2;
       var curY = window.innerHeight / 2;
@@ -733,6 +871,14 @@
         resetIdleTimer();
       });
 
+      window.addEventListener('touchstart', function (e) {
+        if (e.touches && e.touches[0]) {
+          targetX = e.touches[0].clientX;
+          targetY = e.touches[0].clientY;
+          resetIdleTimer();
+        }
+      }, { passive: true });
+
       window.addEventListener('touchmove', function (e) {
         if (e.touches && e.touches[0]) {
           targetX = e.touches[0].clientX;
@@ -744,15 +890,16 @@
       function renderSpotlight() {
         if (revealImg) {
           if (isIdle) {
-            angle += 0.02;
-            var radiusX = Math.min(window.innerWidth * 0.22, 140);
-            var radiusY = Math.min(window.innerHeight * 0.15, 90);
+            angle += 0.018;
+            var isMobile = window.innerWidth <= 540;
+            var radiusX = isMobile ? window.innerWidth * 0.28 : Math.min(window.innerWidth * 0.22, 140);
+            var radiusY = isMobile ? window.innerHeight * 0.16 : Math.min(window.innerHeight * 0.15, 90);
             targetX = (window.innerWidth / 2) + Math.cos(angle) * radiusX;
-            targetY = (window.innerHeight / 2) + Math.sin(angle * 1.5) * radiusY;
+            targetY = (window.innerHeight * 0.45) + Math.sin(angle * 1.5) * radiusY;
           }
 
-          curX += (targetX - curX) * 0.12;
-          curY += (targetY - curY) * 0.12;
+          curX += (targetX - curX) * 0.14;
+          curY += (targetY - curY) * 0.14;
 
           var rect = revealImg.getBoundingClientRect();
           var x = curX - rect.left;
@@ -761,9 +908,9 @@
           var width = window.innerWidth;
           var r = 260;
           if (width < 480) {
-            r = 130;
-          } else if (width < 720) {
-            r = 175;
+            r = 165; // Optimized mobile flashlight radius
+          } else if (width < 768) {
+            r = 200;
           }
 
           var maskGradient = 'radial-gradient(circle ' + r + 'px at ' + x.toFixed(1) + 'px ' + y.toFixed(1) + 'px, #fff 0%, #fff 40%, rgba(255,255,255,0.75) 60%, rgba(255,255,255,0.4) 75%, rgba(255,255,255,0.12) 88%, transparent 100%)';
@@ -815,7 +962,7 @@
         }
       });
 
-      // 6. SCROLL / LOAD REVEAL (IntersectionObserver)
+      // 6. INTERSECTION OBSERVER ENTRANCE
       var fadeUpElements = document.querySelectorAll('.fade-up-reveal');
       if ('IntersectionObserver' in window) {
         var wordObserver = new IntersectionObserver(function (entries, observer) {
@@ -825,7 +972,7 @@
               observer.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.15 });
 
         pullUpElements.forEach(function (el) { wordObserver.observe(el); });
 
@@ -839,7 +986,7 @@
               observer.unobserve(target);
             }
           });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
 
         fadeUpElements.forEach(function (el) { fadeObserver.observe(el); });
       } else {
